@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@theme {
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Fredoka', cursive, sans-serif;
+  --font-fredoka: 'Fredoka', cursive, sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+
+  --color-brand-navy-950: #08080a; /* Sleek obsidian/carbon dark */
+  --color-brand-navy-900: #121214; /* Sleek black card border/background */
+  --color-brand-navy-850: #1a1a1e; /* Deep grey background container */
+  --color-brand-navy-800: #242429; /* Soft dark border */
+  --color-brand-navy-700: #32323b; /* Medium charcoal border */
+  
+  --color-brand-yellow-400: #f18719; /* Exact rich Portuguese Surf Orange from logo */
+  --color-brand-yellow-500: #db760f; /* Warm darker amber-sunset hover shadow */
+  --color-brand-yellow-100: #ffe6cc; /* Light high-contrast background-fill orange tint */
+  --color-brand-yellow-50: #fff6ed;  /* Warm ocean sand/cream off-white padding */
+}
+
+/* ==========================================================================
+   SISTEMA TIPOGRÁFICO KIBER SURF SCHOOL
+   - Fredoka: Títulos principais (700 Bold), títulos secundários (600 SemiBold),
+     nomes de serviços, botões, preços destacados e badges
+   - Manrope: Textos corridos, parágrafos, menus de navegação, formulários,
+     descrições e rodapé
+   ========================================================================== */
+
+body {
+  font-family: 'Manrope', var(--font-sans), sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings Principais (H1, H2) -> Fredoka Bold 700 */
+h1, h2, .font-heading-main, .font-h1, .font-h2 {
+  font-family: 'Fredoka', var(--font-heading), cursive, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Headings Secundários (H3, H4, H5, H6, títulos de cards e secções) -> Fredoka SemiBold 600 */
+h3, h4, h5, h6, .font-heading, .font-title, .font-h3, .font-h4 {
+  font-family: 'Fredoka', var(--font-heading), cursive, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Botões, CTAs e pequenos destaques -> Fredoka SemiBold 600 */
+button, .btn, [role="button"], .font-fredoka, .btn-primary, .btn-secondary {
+  font-family: 'Fredoka', var(--font-heading), cursive, sans-serif;
+  font-weight: 600;
+}
+
+/* Menu de navegação e links de navegação -> Manrope com boa legibilidade */
+nav, nav button, nav a, .nav-item {
+  font-family: 'Manrope', var(--font-sans), sans-serif;
+}
+
+/* Textos corridos, parágrafos, formulários, descrições, labels, listas e footer -> Manrope */
+p, span, li, label, input, select, textarea, div.description, footer, .font-manrope, .font-body {
+  font-family: 'Manrope', var(--font-sans), sans-serif;
+}
+
+/* Destaques numéricos de preços e badges principais -> Fredoka */
+.price-tag, .font-price, [data-price], .price-number {
+  font-family: 'Fredoka', var(--font-heading), cursive, sans-serif;
+  font-weight: 700;
+}
+
+/* Garantir herança correta em elementos aninhados dentro de headings e botões */
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, button *, .font-fredoka * {
+  font-family: inherit;
+}
