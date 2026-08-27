@@ -29,11 +29,11 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'aula-avulso',
     filterKey: 'aula-avulso',
-    serviceKey: 'aulas-grupo',
+    serviceKey: 'aula-avulso',
     tagline: 'Sessão individual com prancha, fato de neoprene e seguro desportivo incluídos',
-    description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
+    description: 'Comece cada sessão com um briefing personalizado, abordando a leitura do oceano, a segurança e os fundamentos técnicos do surf. Pratique as técnicas de remada e de subida para a prancha (pop-up) na areia antes de entrar na água, onde o seu instrutor certificado lhe dará acompanhamento contínuo e orientação prática.\n\nCada sessão é adaptada ao seu nível, objetivos e confiança no mar. Aliando equipamento de alta qualidade a uma formação especializada, esta é mais do que uma simples aula — é uma experiência profissional de surf, pensada para ajudá-lo a evoluir, ganhar confiança e desfrutar verdadeiramente das ondas.\n\nPara aproveitar ao máximo o seu tempo na água, também terá direito a 30 minutos de aluguer gratuito de equipamento após a aula.\n\nJunte-se a nós e transforme a sua estadia no Porto numa aventura de surf inesquecível.',
     badge: 'Iniciação & Aperfeiçoamento',
-    image: '/avulso.jpg',
+    image: '/avulsonovo.jpeg',
     duration: '2 Horas',
     level: 'Todos os Níveis',
     primaryLessonId: 'single-lesson',
@@ -48,11 +48,11 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'privadas',
     filterKey: 'private',
-    serviceKey: 'aulas-privadas',
+    serviceKey: 'privadas',
     tagline: 'Treino exclusivo 1-a-1 ou 2 pessoas com acompanhamento dedicado',
     description: 'O caminho mais rápido e focado para o teu desenvolvimento no surf. Instrutor dedicado com análise técnica personalizada e correções imediatas dentro e fora de água.',
     badge: 'Coaching 100% Exclusivo',
-    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=800&q=80',
+    image: '/Privada3.jpg',
     duration: '2 Horas',
     level: 'Todos os Níveis',
     primaryLessonId: 'private-1-person',
@@ -67,7 +67,7 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'packs',
     filterKey: 'pack',
-    serviceKey: 'aulas-grupo',
+    serviceKey: 'packs',
     tagline: 'Packs flexíveis de 3, 5 e 10 sessões com validade alargada',
     description: 'Packs de aulas de surf para evoluíres ao teu ritmo com horários flexíveis de acordo com as marés, acompanhamento técnico e todo o equipamento incluído.',
     badge: 'Melhor Valor',
@@ -122,7 +122,7 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'grupos-adultos',
     filterKey: 'group',
-    serviceKey: 'aulas-grupo',
+    serviceKey: 'grupos-adultos',
     tagline: 'Aulas em grupo dinâmicas com turmas niveladas',
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador).',
     badge: 'Espírito de Equipa',
@@ -139,7 +139,7 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'grupos-criancas',
     filterKey: 'kids',
-    serviceKey: 'kids',
+    serviceKey: 'grupos-criancas',
     tagline: 'Aulas desenhadas para os 6 aos 14 anos com foco em segurança',
     description: 'Aulas especialmente desenhadas para os mais jovens, combinando diversão, pedagogia adaptada e rácio reduzido de segurança no mar (1 treinador para 4 alunos).',
     badge: 'Kids & Teens • 6 aos 14 Anos',
@@ -156,7 +156,7 @@ export const SERVICES: GlobalService[] = [
     cta: 'Calendário',
     slug: 'surf-trips',
     filterKey: 'trip',
-    serviceKey: 'surf-trip',
+    serviceKey: 'surf-trips',
     tagline: 'Viagens guiadas e fins de semana intensivos em piscina de ondas',
     description: 'Viagens organizadas pela equipa Kiber para os melhores picos e piscinas de ondas do mundo (The Wave Bristol) com coaching técnico e vídeo-análise.',
     badge: 'The Wave Bristol & Expedições',
@@ -190,7 +190,7 @@ export const SERVICES: GlobalService[] = [
     cta: 'Saber mais',
     slug: 'campos-ferias',
     filterKey: 'camp',
-    serviceKey: 'campo-ferias',
+    serviceKey: 'campos-ferias',
     tagline: 'Programas diários e semanais de Verão com surf, almoço e praia',
     description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua (6 aos 16 anos).',
     badge: 'Campos de Férias • 6 aos 16 Anos',
@@ -208,7 +208,7 @@ export const LESSONS: Lesson[] = [
     id: 'single-lesson',
     category: 'group',
     title: 'Aula Avulsa / 1 Lesson',
-    description: 'Aula avulsa de surf em grupo. Perfeita para uma primeira experiência ou prática ocasional na praia de Matosinhos.',
+    description: 'Sessão com briefing personalizado, técnica na areia e acompanhamento contínuo no mar. Inclui 30 minutos de aluguer gratuito de equipamento após a aula.',
     price: 30,
     duration: '2 Horas',
     capacity: 'Máximo 6 alunos por instrutor',
@@ -220,7 +220,7 @@ export const LESSONS: Lesson[] = [
       'Acesso aos balneários da escola'
     ],
     level: 'Todos os Níveis',
-    image: '/avulso.jpg',
+    image: '/avulsonovo.jpeg',
     badge: 'Avulsa / 2h',
     techTouch: 'Análise de postura na areia e feedback instantâneo'
   },
@@ -288,7 +288,7 @@ export const LESSONS: Lesson[] = [
     id: 'private-1-person',
     category: 'private',
     title: 'Aula Privada - 1 Pessoa',
-    description: 'Treino exclusivo de surf 1-para-1 com um treinador dedicado. O caminho mais direto e focado para o seu desenvolvimento rápido no mar.',
+    description: 'Experiência personalizada 1 para 1 com o professor, ideal para iniciação, para crianças ou para quem já sabe surfar, mas tem objetivos específicos que pretende corrigir ou melhorar.',
     price: 65,
     duration: '2 Horas',
     capacity: 'Exclusivo (1 pessoa)',
@@ -300,7 +300,7 @@ export const LESSONS: Lesson[] = [
       'Gravação em vídeo ou foto das melhores ondas'
     ],
     level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=800&q=80',
+    image: '/Privada3.jpg',
     badge: '65€ - Privada / 2h',
     techTouch: 'Feedback em tempo real e foco pedagógico customizado'
   },
@@ -308,7 +308,7 @@ export const LESSONS: Lesson[] = [
     id: 'private-2-people',
     category: 'private',
     title: 'Aula Privada - 2 Pessoas',
-    description: 'Sessão de treino privada para duas pessoas (amigos, casais ou familiares). Evolução partilhada com feedback constante e instrutor dedicado.',
+    description: 'Experiência personalizada 2 para 1 com o professor, ideal para iniciação, para crianças ou para quem já sabe surfar, mas tem objetivos específicos que pretende corrigir ou melhorar. É também uma excelente opção para casais ou amigos que querem ter uma experiência mais próxima e personalizada.',
     price: 55,
     duration: '2 Horas',
     capacity: 'Exclusivo (2 pessoas)',
@@ -892,47 +892,52 @@ export const FAQS = [
 ];
 
 export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
-  'aulas-grupo': {
-    id: 'aulas-grupo',
-    serviceKey: 'aulas-grupo',
-    categoryBadge: 'Aulas de Surf • Método Coletivo',
-    title: 'Aulas de Surf em Grupo',
-    tagline: 'Aprende e evolui em comunidade na Praia de Matosinhos',
-    description: 'Aprende e evolui na companhia de outros surfistas. As nossas aulas de grupo são dinâmicas, divertidas e focadas na segurança e na técnica correta. Os grupos são organizados por nível de experiência para garantir que todos progridem ao seu próprio ritmo com acompanhamento próximo dos nossos treinadores certificados.',
+  'aula-avulso': {
+    id: 'aula-avulso',
+    serviceKey: 'aula-avulso',
+    categoryBadge: 'Aulas de Surf • Sessão Individual',
+    title: 'Aula Avulsa de Surf',
+    tagline: 'Sessão individual com prancha, fato de neoprene e seguro desportivo incluídos',
+    description: 'Comece cada sessão com um briefing personalizado, abordando a leitura do oceano, a segurança e os fundamentos técnicos do surf. Pratique as técnicas de remada e de subida para a prancha (pop-up) na areia antes de entrar na água, onde o seu instrutor certificado lhe dará acompanhamento contínuo e orientação prática.\n\nCada sessão é adaptada ao seu nível, objetivos e confiança no mar. Aliando equipamento de alta qualidade a uma formação especializada, esta é mais do que uma simples aula — é uma experiência profissional de surf, pensada para ajudá-lo a evoluir, ganhar confiança e desfrutar verdadeiramente das ondas.\n\nPara aproveitar ao máximo o seu tempo na água, também terá direito a 30 minutos de aluguer gratuito de equipamento após a aula.\n\nJunte-se a nós e transforme a sua estadia no Porto numa aventura de surf inesquecível.',
     duration: '2 Horas por aula',
-    level: 'Iniciante ao Avançado',
+    level: 'Todos os Níveis',
     priceDisplay: 'Desde 30€',
-    image: '/aulavulso.jpg',
+    image: '/avulsonovo.jpeg',
     includes: [
       'Prancha de Surf adequada ao teu nível e peso',
       'Fato térmico de neoprene (4/3mm) higienizado',
       'Instrutor certificado pela Federação Portuguesa de Surf',
       'Seguro desportivo de acidentes pessoais incluído',
+      '30 minutos de aluguer gratuito de equipamento após a aula',
       'Acesso a balneários, cacifos e duches de água quente'
     ],
     techTouch: 'Análise de postura e posicionamento na areia antes da entrada no mar',
     plans: [
-      { id: 'single-lesson', label: 'Aula avulsa / ', boldLabel: '1 lesson (2h)', price: '30€', priceNum: 30 },
-      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas/lessons', detail: '(validade 3 meses)', price: '80€', priceNum: 80 },
-      { id: 'pack-5-lessons', label: 'Pack ', boldLabel: '5 aulas/lessons', detail: '(validade 3 meses)', price: '100€', priceNum: 100 },
-      { id: 'pack-10-lessons', label: 'Pack ', boldLabel: '10 aulas/lessons', detail: '(validade 5 meses)', price: '180€', priceNum: 180 }
+      { id: 'single-lesson', label: 'Aula avulsa / ', boldLabel: '1 lesson (2h)', detail: '(inclui material e seguro)', price: '30€', priceNum: 30 },
+      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas / lessons', detail: '(validade 3 meses)', price: '80€', priceNum: 80 },
+      { id: 'pack-5-lessons', label: 'Pack ', boldLabel: '5 aulas / lessons', detail: '(validade 3 meses)', price: '100€', priceNum: 100 }
     ],
     highlights: [
       { title: 'Treinadores Certificados FPS', desc: 'Metodologia testada para aprender com rapidez e máxima segurança.' },
       { title: 'Rácio Reduzido', desc: 'Máximo de 6 alunos por instrutor para garantir acompanhamento personalizado.' }
     ]
   },
-  'aulas-privadas': {
-    id: 'aulas-privadas',
-    serviceKey: 'aulas-privadas',
+  'privadas': {
+    id: 'privadas',
+    serviceKey: 'privadas',
     categoryBadge: 'Coaching Privado • 100% Exclusivo',
     title: 'Aulas Privadas & Coaching',
     tagline: 'Atenção 100% personalizada e evolução técnica acelerada',
-    description: 'O caminho mais rápido e eficaz para o teu desenvolvimento no surf. Com um instrutor 100% focado em ti, analisamos cada movimento em detalhe e fazemos correções em tempo real dentro e fora de água.',
+    description: '### 1 pessoa\n\nExperiência personalizada **1 para 1 com o professor**, ideal para iniciação, para crianças ou para quem já sabe surfar, mas tem objetivos específicos que pretende corrigir ou melhorar.\n\n### 2 pessoas\n\nExperiência personalizada **2 para 1 com o professor**, ideal para iniciação, para crianças ou para quem já sabe surfar, mas tem objetivos específicos que pretende corrigir ou melhorar.\n\nÉ também uma excelente opção para **casais ou amigos que querem ter uma experiência mais próxima e personalizada**.',
     duration: '2 Horas',
     level: 'Todos os Níveis (Iniciação a Competição)',
     priceDisplay: 'Desde 55€ / pessoa',
-    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=1200&q=80',
+    image: '/Privada (2).jpg.jpeg',
+    images: [
+      '/Privada (2).jpg.jpeg',
+      '/Privada.jpg.jpeg',
+      '/Privada3.jpg.jpeg'
+    ],
     includes: [
       'Instrutor dedicado em regime de exclusividade total',
       'Material técnico de alta gama à escolha (soft-board, epoxy ou fibra)',
@@ -950,13 +955,42 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
       { title: 'Flexibilidade Total de Horário', desc: 'Escolhe o momento ideal de acordo com a tua disponibilidade e condições do mar.' }
     ]
   },
+  'packs': {
+    id: 'packs',
+    serviceKey: 'packs',
+    categoryBadge: 'Aulas de Surf • Packs Económicos',
+    title: 'Packs de Aulas de Surf',
+    tagline: 'Packs flexíveis de 3, 5 e 10 sessões com validade alargada',
+    description: 'Packs de aulas de surf para evoluíres ao teu ritmo na Praia de Matosinhos. Horários flexíveis adaptados às marés, acompanhamento técnico contínuo e todo o equipamento incluído com validade até 5 meses.\n\n**Cada aula tem 90 minutos.**\n\n**Está incluído:**\n\n* Prancha\n* Fato de neoprene\n* Treinador\n* Seguro',
+    duration: '3 a 10 Aulas (2h cada)',
+    level: 'Todos os Níveis',
+    priceDisplay: 'Desde 80€',
+    image: '/packs.jpg',
+    includes: [
+      'Aulas de surf completas de 2 horas na Praia de Matosinhos',
+      'Prancha de surf adequada e fato de neoprene higienizado incluídos',
+      'Seguro desportivo individual para cada sessão',
+      'Instrutores credenciados pela Federação Portuguesa de Surf',
+      'Acesso completo a balneários, duches quentes e cacifos'
+    ],
+    techTouch: 'Acompanhamento progressivo e validação de etapas de aprendizagem',
+    plans: [
+      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas / lessons', detail: '(validade 3 meses)', price: '80€', priceNum: 80 },
+      { id: 'pack-5-lessons', label: 'Pack ', boldLabel: '5 aulas / lessons', detail: '(validade 3 meses)', price: '100€', priceNum: 100 },
+      { id: 'pack-10-lessons', label: 'Pack ', boldLabel: '10 aulas / lessons', detail: '(validade 5 meses)', price: '180€', priceNum: 180 }
+    ],
+    highlights: [
+      { title: 'Máxima Poupança', desc: 'Tarifa reduzida por aula mantendo todos os benefícios do método Kiber.' },
+      { title: 'Validade Alargada', desc: 'Até 5 meses de validade para gerires os teus agendamentos com total calma.' }
+    ]
+  },
   'mensalidades': {
     id: 'mensalidades',
     serviceKey: 'mensalidades',
     categoryBadge: 'Treino Regular • Planos Mensais',
     title: 'Mensalidades de Surf & Funcional',
     tagline: 'Treinos regulares semanais para uma evolução consistente',
-    description: 'Faz do surf parte da tua rotina semanal. Com os nossos planos mensais, tens treinos regulares e estruturados que combinam sessões práticas no mar de Matosinhos com treinos funcionais de preparação física para potenciar a tua performance.',
+    description: 'Programa dirigido a quem reside no Porto há pelo menos 3 meses e tem como objetivo melhorar e evoluir a sua técnica de surf.\n\nOs treinos decorrem em dias e horários fixos e são acompanhados por treinadores de alto rendimento.\n\nÉ ideal para quem vive no Porto e quer evoluir no surf, mas também para quem pretende fazer parte da comunidade da KIBER SURF SCHOOL.',
     duration: '1 Mês (Renovável)',
     level: 'Todos os Níveis',
     priceDisplay: 'Desde 45€ / mês',
@@ -979,63 +1013,6 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
     highlights: [
       { title: 'Evolução Contínua', desc: 'Consolidação de técnica, resistência física e leitura de mar semana após semana.' },
       { title: 'Comunidade Kiber', desc: 'Ambiente saudável de convívio, treinos em grupo e partilha de ondas.' }
-    ]
-  },
-  'kids': {
-    id: 'kids',
-    serviceKey: 'kids',
-    categoryBadge: 'Kids & Teens • 6 aos 14 Anos',
-    title: 'Kiber Kids & Teens',
-    tagline: 'Aulas divertidas com segurança máxima na Praia de Matosinhos',
-    description: 'Aulas especialmente desenhadas para os mais jovens, combinando diversão, pedagogia adaptada e rácio reduzido de segurança no mar. Aprendem a ler as ondas, respeitar o oceano e evoluir com confiança.',
-    duration: '1h 45m',
-    level: 'Iniciação e Aperfeiçoamento',
-    priceDisplay: 'Desde 25€',
-    image: kidSurferActionImg,
-    includes: [
-      'Pranchas soft-foam de segurança acrescida',
-      'Fatos térmicos de neoprene flexíveis de 4/3mm',
-      'Rácio máximo de 4 a 5 crianças por instrutor',
-      'Seguro desportivo integral incluído',
-      'Jogos didáticos e de equilíbrio na areia'
-    ],
-    techTouch: 'Rácio reforçado de segurança na água (1 instrutor : 4 alunos)',
-    plans: [
-      { id: 'kids-surf', label: 'Aula avulsa ', boldLabel: 'Kiber Kids (1h45m)', detail: '(6 aos 14 anos)', price: '25€', priceNum: 25 },
-      { id: 'single-lesson', label: 'Aula regular de grupo ', boldLabel: 'Geral (2h)', detail: '(a partir dos 12 anos)', price: '30€', priceNum: 30 },
-      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas', detail: '(validade 3 meses)', price: '80€', priceNum: 80 }
-    ],
-    highlights: [
-      { title: 'Segurança em 1º Lugar', desc: 'Acompanhamento constante dentro de água e equipamentos próprios para crianças.' },
-      { title: 'Desenvolvimento Motor', desc: 'Estimula o equilíbrio, foco, confiança e respeito pela natureza marítima.' }
-    ]
-  },
-  'erasmus': {
-    id: 'erasmus',
-    serviceKey: 'erasmus',
-    categoryBadge: 'Estudantes & Erasmus • Preços Especiais',
-    title: 'Erasmus Surf Experience',
-    tagline: 'Vive a cultura de surf no Porto com a comunidade internacional',
-    description: 'A melhor forma de viver a cultura de surf em Portugal durante o teu semestre no Porto. Aulas dinâmicas, comunidade internacional vibrante e condições exclusivas com o teu cartão de estudante.',
-    duration: '2 Horas',
-    level: 'Todos os Níveis',
-    priceDisplay: 'Desde 10€',
-    image: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?auto=format&fit=crop&w=1200&q=80',
-    includes: [
-      'Prancha e fato de neoprene 4/3mm incluídos',
-      'Treinadores fluentes em inglês, espanhol e português',
-      'Seguro desportivo incluído em todas as sessões',
-      'Acesso total aos balneários da escola'
-    ],
-    techTouch: 'Integração na comunidade internacional Kiber Surf Tribe',
-    plans: [
-      { id: 'rental-board-wetsuit-2h-erasmus', label: 'Aluguer Prancha + Fato (2h) ', boldLabel: 'Erasmus Rental', detail: '(com cartão estudante)', price: '10€', priceNum: 10 },
-      { id: 'single-lesson', label: 'Aula de Surf Avulsa ', boldLabel: 'Erasmus Lesson (2h)', detail: '(tarifa especial)', price: '20€', priceNum: 20 },
-      { id: 'pack-3-lessons', label: 'Pack 3 Aulas ', boldLabel: 'Erasmus Pack', detail: '(validade 3 meses)', price: '55€', priceNum: 55 }
-    ],
-    highlights: [
-      { title: 'Descontos Exclusivos', desc: 'Tarifas especiais para estudantes universitários e membros Erasmus.' },
-      { title: 'Multilingual Coaches', desc: 'Aulas lecionadas em português, inglês ou espanhol para fácil compreensão.' }
     ]
   },
   'aluguer': {
@@ -1070,15 +1047,131 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
       { title: 'Aconselhamento Técnico', desc: 'Ajudamos-te a escolher a prancha com o volume certo para as ondas do dia.' }
     ]
   },
-  'campo-ferias': {
-    id: 'campo-ferias',
-    serviceKey: 'campo-ferias',
-    categoryBadge: 'Campos de Férias • 6 aos 16 Anos',
-    title: 'Campo de Férias de Surf',
-    tagline: 'A melhor aventura de Verão na Praia de Matosinhos',
-    description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e muita diversão na Praia de Matosinhos. Programa completo com aulas de surf bidiárias, jogos na areia, skate/surfskate e reforço desportivo.',
-    duration: '1 Semana ou Diário',
+  'grupos-adultos': {
+    id: 'grupos-adultos',
+    serviceKey: 'grupos-adultos',
+    categoryBadge: 'Método Coletivo • Praia de Matosinhos',
+    title: 'Aulas de Surf em Grupos Adultos',
+    tagline: 'Turmas dinâmicas niveladas por experiência e rácio reduzido',
+    description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador) na Praia de Matosinhos. Acompanhamento próximo e técnico para evolução segura.',
+    duration: '2 Horas por aula',
+    level: 'Iniciante ao Avançado',
+    priceDisplay: 'Desde 30€',
+    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80',
+    includes: [
+      'Prancha de Surf adequada ao teu nível e peso',
+      'Fato térmico de neoprene (4/3mm) higienizado',
+      'Instrutor certificado pela Federação Portuguesa de Surf',
+      'Seguro desportivo de acidentes pessoais incluído',
+      'Acesso a balneários, cacifos e duches de água quente'
+    ],
+    techTouch: 'Análise de postura e posicionamento na areia antes da entrada no mar',
+    plans: [
+      { id: 'single-lesson', label: 'Aula avulsa / ', boldLabel: '1 lesson (2h)', price: '30€', priceNum: 30 },
+      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas/lessons', detail: '(validade 3 meses)', price: '80€', priceNum: 80 },
+      { id: 'pack-5-lessons', label: 'Pack ', boldLabel: '5 aulas/lessons', detail: '(validade 3 meses)', price: '100€', priceNum: 100 },
+      { id: 'pack-10-lessons', label: 'Pack ', boldLabel: '10 aulas/lessons', detail: '(validade 5 meses)', price: '180€', priceNum: 180 },
+      { id: 'surf-guide', label: 'Surf Guide / ', boldLabel: 'Guia Local (Meio Dia)', detail: '(picos isolados)', price: '75€', priceNum: 75 }
+    ],
+    highlights: [
+      { title: 'Treinadores Certificados FPS', desc: 'Metodologia testada para aprender com rapidez e máxima segurança.' },
+      { title: 'Rácio Reduzido', desc: 'Máximo de 6 alunos por instrutor para garantir acompanhamento personalizado.' }
+    ]
+  },
+  'grupos-criancas': {
+    id: 'grupos-criancas',
+    serviceKey: 'grupos-criancas',
+    categoryBadge: 'Kids & Teens • 6 aos 14 Anos',
+    title: 'Aulas de Surf Grupos Crianças & Teens',
+    tagline: 'Aulas divertidas com segurança máxima na Praia de Matosinhos',
+    description: 'Aulas especialmente desenhadas para os mais jovens (6 aos 14 anos), combinando diversão, pedagogia adaptada e rácio reduzido de segurança no mar (1 treinador para 4 alunos). Aprendem a ler as ondas, respeitar o oceano e evoluir com confiança.',
+    duration: '1h 45m',
+    level: '6 aos 14 Anos',
+    priceDisplay: 'Desde 25€',
+    image: '/criancas.jpg',
+    includes: [
+      'Pranchas soft-foam de segurança acrescida',
+      'Fatos térmicos de neoprene flexíveis de 4/3mm',
+      'Rácio máximo de 4 a 5 crianças por instrutor',
+      'Seguro desportivo integral incluído',
+      'Jogos didáticos e de equilíbrio na areia'
+    ],
+    techTouch: 'Rácio reforçado de segurança na água (1 instrutor : 4 alunos)',
+    plans: [
+      { id: 'kids-surf', label: 'Aula avulsa ', boldLabel: 'Kiber Kids (1h45m)', detail: '(6 aos 14 anos)', price: '25€', priceNum: 25 },
+      { id: 'single-lesson', label: 'Aula regular de grupo ', boldLabel: 'Geral (2h)', detail: '(a partir dos 12 anos)', price: '30€', priceNum: 30 },
+      { id: 'pack-3-lessons', label: 'Pack ', boldLabel: '3 aulas Kids', detail: '(validade 3 meses)', price: '80€', priceNum: 80 }
+    ],
+    highlights: [
+      { title: 'Segurança em 1º Lugar', desc: 'Acompanhamento constante dentro de água e equipamentos próprios para crianças.' },
+      { title: 'Desenvolvimento Motor', desc: 'Estimula o equilíbrio, foco, confiança e respeito pela natureza marítima.' }
+    ]
+  },
+  'surf-trips': {
+    id: 'surf-trips',
+    serviceKey: 'surf-trips',
+    categoryBadge: 'Expedição Internacional • The Wave Bristol',
+    title: 'The Wave Surf Trips',
+    tagline: 'Piscina de ondas de classe mundial e evolução express',
+    description: 'Desenvolvido à medida para a tua evolução técnica. Um fim de semana intenso de ondas perfeitas e repetíveis na piscina de ondas de classe mundial The Wave em Bristol com vídeo-análise e coaching de alto rendimento.',
+    duration: 'Fim de Semana (3 Dias)',
+    level: 'Intermédio ao Avançado',
+    priceDisplay: 'Desde 500€',
+    image: theWaveBristolImg,
+    includes: [
+      'Sessões de surf garantidas na piscina The Wave Bristol',
+      'Alojamento incluído em acomodação parceira eco-lodge',
+      'Coaching técnico intensivo com vídeo-análise diária',
+      'Transferes locais e suporte da equipa Kiber',
+      'Pequeno-almoço e refeições nos dias do programa'
+    ],
+    techTouch: 'Repetição contínua em ondas mecânicas com gravação HD e debriefing',
+    plans: [
+      { id: 'surftrip-bristol-member', label: 'The Wave Bristol ', boldLabel: 'Kiber Members', detail: '(3 sessões + coaching + alojamento)', price: '500€', priceNum: 500 },
+      { id: 'surftrip-bristol-general', label: 'The Wave Bristol ', boldLabel: 'Preço Geral', detail: '(3 sessões + coaching + alojamento)', price: '625€', priceNum: 625 }
+    ],
+    highlights: [
+      { title: 'Ondas Mecânicas Perfeitas', desc: 'Frequência constante para aperfeiçoar manobras sem depender do mar.' },
+      { title: 'Vídeo-Coaching Diário', desc: 'Debriefing detalhado de cada onda após as sessões com treinador pro.' }
+    ]
+  },
+  'erasmus': {
+    id: 'erasmus',
+    serviceKey: 'erasmus',
+    categoryBadge: 'Estudantes & Erasmus • Preços Especiais',
+    title: 'Erasmus & Estudantes Residentes',
+    tagline: 'Vive a cultura de surf no Porto com a comunidade internacional',
+    description: 'A melhor forma de viver a cultura de surf em Portugal durante o teu semestre no Porto. Aulas dinâmicas, comunidade internacional vibrante e condições exclusivas com o teu cartão de estudante.',
+    duration: '2 Horas',
     level: 'Todos os Níveis',
+    priceDisplay: 'Desde 10€',
+    image: '/eramus.jpg',
+    includes: [
+      'Prancha e fato de neoprene 4/3mm incluídos',
+      'Treinadores fluentes em inglês, espanhol e português',
+      'Seguro desportivo incluído em todas as sessões',
+      'Acesso total aos balneários da escola'
+    ],
+    techTouch: 'Integração na comunidade internacional Kiber Surf Tribe',
+    plans: [
+      { id: 'rental-board-wetsuit-2h-erasmus', label: 'Aluguer Prancha + Fato (2h) ', boldLabel: 'Erasmus Rental', detail: '(com cartão estudante)', price: '10€', priceNum: 10 },
+      { id: 'erasmus-lesson-2h', label: 'Aula de Surf Avulsa ', boldLabel: 'Erasmus Lesson (2h)', detail: '(tarifa especial)', price: '20€', priceNum: 20 },
+      { id: 'erasmus-pack-3', label: 'Pack 3 Aulas ', boldLabel: 'Erasmus Pack', detail: '(validade 3 meses)', price: '55€', priceNum: 55 }
+    ],
+    highlights: [
+      { title: 'Descontos Exclusivos', desc: 'Tarifas especiais para estudantes universitários e membros Erasmus.' },
+      { title: 'Multilingual Coaches', desc: 'Aulas lecionadas em português, inglês ou espanhol para fácil compreensão.' }
+    ]
+  },
+  'campos-ferias': {
+    id: 'campos-ferias',
+    serviceKey: 'campos-ferias',
+    categoryBadge: 'Campos de Férias • 6 aos 16 Anos',
+    title: 'Campos de Férias de Surf',
+    tagline: 'A melhor aventura de Verão na Praia de Matosinhos',
+    description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e muita diversão na Praia de Matosinhos. Programa completo com aulas de surf bidiárias, jogos na areia, skate/surfskate e reforço desportivo com supervisão permanente.',
+    duration: '1 Semana ou Diário (09h às 18h)',
+    level: '6 aos 16 Anos',
     priceDisplay: 'Desde 45€ / dia',
     image: '/campodeferias.jpg',
     includes: [
@@ -1090,40 +1183,24 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
     ],
     techTouch: 'Rácio de segurança de 1 treinador por 5 alunos e relatórios de progresso',
     plans: [
-      { id: 'camp-day-lunch', label: 'Diária Avulsa ', boldLabel: 'com Almoço', detail: '(09h às 18h)', price: '50€', priceNum: 50 },
-      { id: 'camp-day-no-lunch', label: 'Diária Avulsa ', boldLabel: 'sem Almoço', detail: '(traz almoço)', price: '45€', priceNum: 45 },
-      { id: 'camp-week-no-lunch', label: 'Semana Completa ', boldLabel: 'sem Almoço', detail: '(Seg a Sex)', price: '180€', priceNum: 180 },
-      { id: 'camp-week-lunch', label: 'Semana Completa ', boldLabel: 'com Almoço', detail: '(Seg a Sex)', price: '220€', priceNum: 220 }
+      { id: 'camp-day-no-lunch', label: 'Diária Avulsa ', boldLabel: 'sem Almoço', detail: '(09h às 18h - traz almoço)', price: '45€', priceNum: 45 },
+      { id: 'camp-day-lunch', label: 'Diária Avulsa ', boldLabel: 'com Almoço', detail: '(09h às 18h - com almoço)', price: '55€', priceNum: 55 },
+      { id: 'camp-week-no-lunch', label: 'Semana Completa ', boldLabel: 'sem Almoço', detail: '(Seg a Sex - traz almoço)', price: '180€', priceNum: 180 },
+      { id: 'camp-week-lunch', label: 'Semana Completa ', boldLabel: 'com Almoço', detail: '(Seg a Sex - com almoço)', price: '220€', priceNum: 220 }
     ],
     highlights: [
       { title: 'Supervisão Total', desc: 'Monitores dedicados garantem acompanhamento permanente e ambiente seguro.' },
       { title: 'Atividades Complementares', desc: 'Surfskate, jogos de praia e teoria das correntes e segurança marítima.' }
     ]
-  },
-  'surf-trip': {
-    id: 'surf-trip',
-    serviceKey: 'surf-trip',
-    categoryBadge: 'Expedição Internacional • The Wave Bristol',
-    title: 'The Wave Surf Trip',
-    tagline: 'Piscina de ondas de classe mundial e evolução express',
-    description: 'Desenvolvido à medida para a tua evolução técnica. Um fim de semana intenso de ondas perfeitas e repetíveis na piscina de ondas de classe mundial em Bristol com vídeo-análise e coaching de alto rendimento.',
-    duration: 'Fim de Semana (3 Dias)',
-    level: 'Intermédio ao Avançado',
-    priceDisplay: '490€',
-    image: theWaveBristolImg,
-    includes: [
-      'Sessões de surf garantidas na piscina The Wave Bristol',
-      'Alojamento incluído em acomodação parceira',
-      'Coaching técnico intensivo com vídeo-análise diária',
-      'Transferes locais e suporte da equipa Kiber'
-    ],
-    techTouch: 'Repetição contínua em ondas mecânicas com gravação HD',
-    plans: [
-      { id: 'the-wave-bristol-trip', label: 'The Wave Bristol ', boldLabel: 'Express Evolution Weekend', detail: '(3 dias com alojamento)', price: '490€', priceNum: 490 }
-    ],
-    highlights: [
-      { title: 'Ondas Mecânicas Perfeitas', desc: 'Frequência constante para aperfeiçoar manobras sem depender do mar.' },
-      { title: 'Vídeo-Coaching Diário', desc: 'Debriefing detalhado de cada onda após as sessões com treinador pro.' }
-    ]
   }
 };
+
+// Aliases for alternate slugs / keys
+SERVICE_DETAILS['aulas-grupo'] = SERVICE_DETAILS['grupos-adultos'];
+SERVICE_DETAILS['aulas-privadas'] = SERVICE_DETAILS['privadas'];
+SERVICE_DETAILS['kids'] = SERVICE_DETAILS['grupos-criancas'];
+SERVICE_DETAILS['surf-trip'] = SERVICE_DETAILS['surf-trips'];
+SERVICE_DETAILS['campo-ferias'] = SERVICE_DETAILS['campos-ferias'];
+SERVICE_DETAILS['packs-de-aulas'] = SERVICE_DETAILS['packs'];
+SERVICE_DETAILS['erasmus-residentes'] = SERVICE_DETAILS['erasmus'];
+

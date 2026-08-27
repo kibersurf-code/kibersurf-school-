@@ -42,13 +42,13 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
     primaryBtnText: 'Reservar Aula Avulsa',
     secondaryBtnText: 'Ver Todas as Aulas',
-    bgImage: '/avulso.jpg',
+    bgImage: '/avulsonovo.jpeg',
     icon: Waves,
   },
   // 2. Privadas
   {
     id: 'privadas',
-    serviceId: 'aulas-privadas',
+    serviceId: 'privadas',
     type: 'service',
     tagline: 'COACHING EXCLUSIVO • 100% PERSONALIZADO',
     title: 'Aulas Privadas de',
@@ -56,7 +56,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Treino exclusivo com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
     primaryBtnText: 'Ver Aulas Privadas',
     secondaryBtnText: 'Saber Mais',
-    bgImage: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=2000&q=80',
+    bgImage: '/Privada3.jpg',
     icon: Compass,
   },
   // 3. Packs de aulas
@@ -132,7 +132,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
   // 8. Surf Trips
   {
     id: 'surf-trips',
-    serviceId: 'surf-trip',
+    serviceId: 'surf-trips',
     type: 'service',
     tagline: 'EXPERIÊNCIAS INTERNACIONAIS & THE WAVE',
     title: 'Kiber',
@@ -160,7 +160,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
   // 10. Campos de Férias
   {
     id: 'campos-ferias',
-    serviceId: 'campo-ferias',
+    serviceId: 'campos-ferias',
     type: 'service',
     tagline: 'KIDS & TEENS • FÉRIAS ESCOLARES',
     title: 'Campos de',
@@ -168,7 +168,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e diversão na Praia de Matosinhos com supervisão contínua.',
     primaryBtnText: 'Saber mais & Inscrições',
     secondaryBtnText: 'Ver Todas as Aulas',
-    bgImage: '/criancas.jpg',
+    bgImage: '/campodeferias.jpg',
     icon: Sun,
   },
 ];

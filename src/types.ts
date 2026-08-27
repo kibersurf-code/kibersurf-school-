@@ -57,6 +57,7 @@ export interface ServiceDetailItem {
   level: string;
   priceDisplay: string;
   image: string;
+  images?: string[];
   includes: string[];
   techTouch?: string;
   plans: ServicePlanOption[];

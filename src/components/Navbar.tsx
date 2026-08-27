@@ -9,6 +9,7 @@ interface NavbarProps {
   bookingCount: number;
   selectedFilter?: 'all' | 'lessons' | LessonCategory | string;
   setSelectedFilter?: (filter: any) => void;
+  onSelectService?: (serviceId: string) => void;
   onBookNow?: () => void;
   onLogoClick?: () => void;
 }
@@ -21,6 +22,7 @@ export default function Navbar({
   setActiveSection, 
   selectedFilter,
   setSelectedFilter,
+  onSelectService,
   onBookNow,
   onLogoClick
 }: NavbarProps) {
@@ -77,17 +79,21 @@ export default function Navbar({
     setIsOpen(false);
     setIsServicesOpen(false);
 
-    const foundService = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId);
-
-    if (foundService) {
-      if (setSelectedFilter) setSelectedFilter(foundService.filterKey);
-      setActiveSection('aulas');
-    } else if (serviceId === 'todas-aulas' || serviceId === 'aulas-surf' || serviceId === 'all') {
-      if (setSelectedFilter) setSelectedFilter('all');
-      setActiveSection('aulas');
+    if (onSelectService) {
+      onSelectService(serviceId);
     } else {
-      if (setSelectedFilter) setSelectedFilter(serviceId);
-      setActiveSection('aulas');
+      const foundService = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId);
+
+      if (foundService) {
+        if (setSelectedFilter) setSelectedFilter(foundService.filterKey);
+        setActiveSection('aulas');
+      } else if (serviceId === 'todas-aulas' || serviceId === 'aulas-surf' || serviceId === 'all') {
+        if (setSelectedFilter) setSelectedFilter('all');
+        setActiveSection('aulas');
+      } else {
+        if (setSelectedFilter) setSelectedFilter(serviceId);
+        setActiveSection('aulas');
+      }
     }
 
     window.scrollTo({ top: 0, behavior: 'instant' });

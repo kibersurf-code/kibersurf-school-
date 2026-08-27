@@ -11,7 +11,6 @@ import {
   Building2, 
   Check, 
   Flame,
-  Globe2,
   ShieldCheck,
   Coffee,
   Info
@@ -75,16 +74,6 @@ const FACILITIES: FacilityItem[] = [
     image: 'https://images.unsplash.com/photo-1583416750470-965b2707b355?auto=format&fit=crop&w=800&q=80',
     features: ['Cacifos para pertences', 'Bancos e cabides', 'Troca de roupa segura', 'Ambiente arejado'],
     icon: Lock,
-  },
-  {
-    id: 'outras-instalacoes',
-    title: 'Outras Instalações',
-    category: 'Comunidade & Suporte',
-    description: 'Espaço de receção acolhedor, lounge de convívio para a comunidade de surfistas, zona de secagem de fatos e arrumação técnica de pranchas e equipamento.',
-    badge: 'Lounge & Guarda de Material',
-    image: 'https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=800&q=80',
-    features: ['Receção e check-in', 'Lounge e zona de convívio', 'Arrumação de pranchas', 'Secagem de fatos'],
-    icon: Building2,
   },
 ];
 
@@ -193,25 +182,14 @@ export default function AboutSection({
                 Com mais de 25 anos dedicados ao surf, bodyboard e desportos de deslize, acumulámos uma enorme bagagem de experiência e formação para partilhar contigo todos os nossos conhecimentos. Disponibilizamos aulas de surf para todos os níveis, surfskate e campos de férias, sempre com metodologia focada na segurança, diversão e evolução consistente.
               </p>
 
-              {/* BLOCO DESTAQUE: SABIAS QUE... */}
-              <div className="bg-gradient-to-br from-[#fff7ed] via-[#fffbf5] to-[#fef3c7] border-2 border-[#f18719]/30 rounded-2xl p-5 sm:p-6 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#f18719]/10 rounded-full blur-2xl pointer-events-none" />
-                <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#f18719] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                    <Globe2 className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="space-y-1 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-black text-[#f18719] uppercase tracking-wider flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        Sabias que...
-                      </span>
-                    </div>
-                    <p className="text-sm sm:text-base text-slate-900 font-bold leading-snug">
-                      A Praia de Matosinhos é considerada um dos melhores locais da Europa para aprender a fazer surf, além de ser uma <span className="text-[#f18719] underline decoration-[#f18719]/40 underline-offset-2">World Surf City</span>.
-                    </p>
-                  </div>
-                </div>
+              {/* BLOCO DESTAQUE: SABIAS QUE... (DESIGN ELEGANTE SEM ÍCONES) */}
+              <div className="border-l-2 border-[#f18719] bg-stone-50/80 rounded-r-2xl p-4 sm:p-5 text-left space-y-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+                <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-[#f18719] uppercase block font-sans">
+                  Sabias que...
+                </span>
+                <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed font-manrope">
+                  A Praia de Matosinhos é considerada um dos melhores locais da Europa para aprender a fazer surf, além de ser reconhecida oficialmente como uma <strong className="font-bold text-slate-950">World Surf City</strong>.
+                </p>
               </div>
 
               {isStaffButtonVisible && (
@@ -254,8 +232,8 @@ export default function AboutSection({
               </p>
             </div>
 
-            {/* Grid de Instalações (5 espaços com placeholders estruturados) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Grid de Instalações */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {FACILITIES.map((facility) => {
                 const IconComponent = facility.icon;
                 return (

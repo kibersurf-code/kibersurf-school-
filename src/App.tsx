@@ -18,7 +18,8 @@ import { Compass, Waves, MessageCircle, Instagram, Facebook, Phone, Mail } from 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'lessons' | LessonCategory>('all');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'lessons' | LessonCategory | string>('all');
+  const [activeDetailKey, setActiveDetailKey] = useState<string | null>(null);
   const [heroResetTrigger, setHeroResetTrigger] = useState<number>(0);
   
   // Real LocalStorage state management
@@ -37,6 +38,7 @@ export default function App() {
   const handleLogoClick = () => {
     setActiveSection('inicio');
     setSelectedFilter('all');
+    setActiveDetailKey(null);
     setHeroResetTrigger((prev) => prev + 1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -72,21 +74,58 @@ export default function App() {
   };
 
   const handleServiceNavigation = (serviceId: string) => {
-    const found = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId);
+    const found = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId || s.serviceKey === serviceId);
     if (found) {
       setSelectedFilter(found.filterKey as any);
+      setActiveDetailKey(found.serviceKey || found.id);
       navigateToSection('aulas');
-    } else if (serviceId === 'campo-ferias' || serviceId === 'campos-ferias') {
+    } else if (serviceId === 'campo-ferias' || serviceId === 'campos-ferias' || serviceId === 'campos-de-ferias') {
       setSelectedFilter('camp');
+      setActiveDetailKey('campos-ferias');
       navigateToSection('aulas');
     } else if (serviceId === 'surf-trip' || serviceId === 'surf-trips') {
       setSelectedFilter('trip');
+      setActiveDetailKey('surf-trips');
       navigateToSection('aulas');
-    } else if (serviceId === 'aulas-privadas') {
+    } else if (serviceId === 'aulas-privadas' || serviceId === 'privadas') {
       setSelectedFilter('private');
+      setActiveDetailKey('privadas');
+      navigateToSection('aulas');
+    } else if (serviceId === 'aula-avulso' || serviceId === 'single-lesson') {
+      setSelectedFilter('aula-avulso');
+      setActiveDetailKey('aula-avulso');
+      navigateToSection('aulas');
+    } else if (serviceId === 'packs' || serviceId === 'packs-de-aulas') {
+      setSelectedFilter('pack');
+      setActiveDetailKey('packs');
+      navigateToSection('aulas');
+    } else if (serviceId === 'mensalidades') {
+      setSelectedFilter('monthly');
+      setActiveDetailKey('mensalidades');
+      navigateToSection('aulas');
+    } else if (serviceId === 'aluguer') {
+      setSelectedFilter('rental');
+      setActiveDetailKey('aluguer');
+      navigateToSection('aulas');
+    } else if (serviceId === 'grupos-adultos' || serviceId === 'aulas-grupo') {
+      setSelectedFilter('group');
+      setActiveDetailKey('grupos-adultos');
+      navigateToSection('aulas');
+    } else if (serviceId === 'grupos-criancas' || serviceId === 'kids') {
+      setSelectedFilter('kids');
+      setActiveDetailKey('grupos-criancas');
+      navigateToSection('aulas');
+    } else if (serviceId === 'erasmus' || serviceId === 'erasmus-residentes') {
+      setSelectedFilter('erasmus');
+      setActiveDetailKey('erasmus');
+      navigateToSection('aulas');
+    } else if (serviceId === 'all' || serviceId === 'todos') {
+      setSelectedFilter('all');
+      setActiveDetailKey(null);
       navigateToSection('aulas');
     } else {
       setSelectedFilter('all');
+      setActiveDetailKey(null);
       navigateToSection('aulas');
     }
   };
@@ -129,6 +168,7 @@ export default function App() {
         bookingCount={bookings.length}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
+        onSelectService={handleServiceNavigation}
         onBookNow={handleBookSingleLesson}
         onLogoClick={handleLogoClick}
       />
@@ -142,6 +182,7 @@ export default function App() {
               onAgendarClick={() => navigateToSection('agendar')} 
               onExplorarClick={() => {
                 setSelectedFilter('all');
+                setActiveDetailKey(null);
                 navigateToSection('aulas');
               }}
               onServiceSelect={handleServiceNavigation}
@@ -162,12 +203,10 @@ export default function App() {
                 navigateToSection('agendar');
               }}
               onNavigateToCategory={(categoryId) => {
-                setSelectedFilter(categoryId);
-                navigateToSection('aulas');
+                handleServiceNavigation(categoryId);
               }}
               onViewDetails={(lesson) => {
-                setSelectedFilter(lesson.category || 'all');
-                navigateToSection('aulas');
+                handleServiceNavigation(lesson.serviceKey || lesson.category || 'all');
               }}
             />
             
@@ -202,6 +241,8 @@ export default function App() {
             }}
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
+            initialDetailKey={activeDetailKey}
+            onDetailKeyChange={setActiveDetailKey}
           />
         )}
 

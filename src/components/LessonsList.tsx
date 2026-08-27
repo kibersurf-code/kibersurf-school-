@@ -4,12 +4,14 @@ import { Lesson, LessonCategory } from '../types';
 import { ShieldCheck, Star, SlidersHorizontal, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 import ServiceDetailView from './ServiceDetailView';
+import theWaveTripImg from '../assets/images/the_wave_bristol_trip_1784800173484.jpg';
 
 interface LessonsListProps {
   onSelectLesson: (lesson: Lesson) => void;
   selectedFilter: 'all' | 'lessons' | LessonCategory | string;
   setSelectedFilter: (filter: any) => void;
   initialDetailKey?: string | null;
+  onDetailKeyChange?: (key: string | null) => void;
 }
 
 interface CategoryInfo {
@@ -26,14 +28,14 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Aulas de Surf • Sessão Individual',
     description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
     countLabel: 'Aula Avulsa',
-    bgImage: '/avulso.jpg',
+    bgImage: '/avulsonovo.jpeg',
   },
   'private': {
     title: 'PRIVADAS',
     badge: 'Coaching Exclusivo • 100% Personalizado',
     description: 'Treino 1-para-1 ou em dupla com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
     countLabel: 'Aulas Privadas',
-    bgImage: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=2000&q=80',
+    bgImage: '/Privada (2).jpg.jpeg',
   },
   'pack': {
     title: 'PACKS DE AULAS',
@@ -75,7 +77,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Expedição Técnica • The Wave Bristol',
     description: 'Fins de semana intensivos de evolução em piscina de ondas artificiais de classe mundial com vídeo-análise frame-a-frame e coaching de alto rendimento.',
     countLabel: 'Surf Trips',
-    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    bgImage: theWaveTripImg,
   },
   'erasmus': {
     title: 'ERASMUS E RESIDENTES',
@@ -89,7 +91,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Campos de Férias • 6 aos 16 Anos',
     description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua.',
     countLabel: 'Campos de Férias',
-    bgImage: '/criancas.jpg',
+    bgImage: '/campodeferias.jpg',
   },
   'all': {
     title: 'AULAS DE SURF & SERVIÇOS',
@@ -100,13 +102,60 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
   },
 };
 
+// Map between tab ids, filter keys and SERVICE_DETAILS keys
+const getDetailKeyFromTabId = (tabId: string): string | null => {
+  if (!tabId || tabId === 'all') return null;
+  if (tabId === 'aula-avulso' || tabId === 'single-lesson') return 'aula-avulso';
+  if (tabId === 'private' || tabId === 'privadas' || tabId === 'aulas-privadas') return 'privadas';
+  if (tabId === 'pack' || tabId === 'packs' || tabId === 'packs-de-aulas') return 'packs';
+  if (tabId === 'monthly' || tabId === 'mensalidades') return 'mensalidades';
+  if (tabId === 'rental' || tabId === 'aluguer') return 'aluguer';
+  if (tabId === 'group' || tabId === 'grupos-adultos' || tabId === 'aulas-grupo') return 'grupos-adultos';
+  if (tabId === 'kids' || tabId === 'grupos-criancas') return 'grupos-criancas';
+  if (tabId === 'trip' || tabId === 'surf-trips' || tabId === 'surf-trip') return 'surf-trips';
+  if (tabId === 'erasmus' || tabId === 'erasmus-residentes') return 'erasmus';
+  if (tabId === 'camp' || tabId === 'campos-ferias' || tabId === 'campo-ferias' || tabId === 'campos-de-ferias') return 'campos-ferias';
+  
+  // Find in SERVICES
+  const found = SERVICES.find(s => s.id === tabId || s.filterKey === tabId || s.serviceKey === tabId || s.slug === tabId);
+  if (found) return found.serviceKey;
+
+  if (SERVICE_DETAILS[tabId]) return tabId;
+  return null;
+};
+
+const getCategoryKeyFromDetailKey = (detailKey: string | null): string => {
+  if (!detailKey) return 'all';
+  if (detailKey === 'aula-avulso') return 'aula-avulso';
+  if (detailKey === 'privadas' || detailKey === 'aulas-privadas') return 'private';
+  if (detailKey === 'packs' || detailKey === 'packs-de-aulas') return 'pack';
+  if (detailKey === 'mensalidades') return 'monthly';
+  if (detailKey === 'aluguer') return 'rental';
+  if (detailKey === 'grupos-adultos' || detailKey === 'aulas-grupo') return 'group';
+  if (detailKey === 'grupos-criancas' || detailKey === 'kids') return 'kids';
+  if (detailKey === 'surf-trips' || detailKey === 'surf-trip') return 'trip';
+  if (detailKey === 'erasmus' || detailKey === 'erasmus-residentes') return 'erasmus';
+  if (detailKey === 'campos-ferias' || detailKey === 'campo-ferias') return 'camp';
+  return 'all';
+};
+
 export default function LessonsList({ 
   onSelectLesson, 
   selectedFilter, 
   setSelectedFilter,
-  initialDetailKey = null
+  initialDetailKey = null,
+  onDetailKeyChange
 }: LessonsListProps) {
-  const [activeDetailKey, setActiveDetailKey] = useState<string | null>(initialDetailKey);
+  // Determine initial detail key from prop or filter
+  const resolveInitialDetail = () => {
+    if (initialDetailKey) return initialDetailKey;
+    if (selectedFilter && selectedFilter !== 'all') {
+      return getDetailKeyFromTabId(selectedFilter);
+    }
+    return null;
+  };
+
+  const [activeDetailKey, setActiveDetailKey] = useState<string | null>(resolveInitialDetail());
 
   // Drag-to-scroll & horizontal navigation state
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -117,10 +166,25 @@ export default function LessonsList({
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Sync with prop changes
+  // Sync state when props change
   useEffect(() => {
-    setActiveDetailKey(initialDetailKey);
+    if (initialDetailKey !== undefined) {
+      setActiveDetailKey(initialDetailKey);
+    } else if (selectedFilter === 'all') {
+      setActiveDetailKey(null);
+    } else if (selectedFilter) {
+      const derived = getDetailKeyFromTabId(selectedFilter);
+      setActiveDetailKey(derived);
+    }
   }, [selectedFilter, initialDetailKey]);
+
+  // Notify parent if activeDetailKey changes
+  const updateActiveDetailKey = (key: string | null) => {
+    setActiveDetailKey(key);
+    if (onDetailKeyChange) {
+      onDetailKeyChange(key);
+    }
+  };
 
   // Check scroll bounds to display/hide arrows
   const updateScrollBounds = () => {
@@ -142,26 +206,29 @@ export default function LessonsList({
         window.removeEventListener('resize', updateScrollBounds);
       };
     }
-  }, [selectedFilter]);
+  }, [selectedFilter, activeDetailKey]);
 
-  // Normalized filter mapping
-  const getNormalizedFilter = (filter: string): string => {
-    if (filter === 'aula-avulso' || filter === 'single-lesson' || filter === 'single') return 'aula-avulso';
-    if (filter === 'packs' || filter === 'pack') return 'pack';
-    if (filter === 'mensalidades' || filter === 'monthly') return 'monthly';
-    if (filter === 'aulas-privadas' || filter === 'private') return 'private';
-    if (filter === 'grupos-adultos' || filter === 'group') return 'group';
-    if (filter === 'grupos-criancas' || filter === 'kids') return 'kids';
-    if (filter === 'erasmus') return 'erasmus';
-    if (filter === 'aluguer' || filter === 'rental') return 'rental';
-    if (filter === 'sup') return 'sup';
-    if (filter === 'campos-ferias' || filter === 'camp') return 'camp';
-    if (filter === 'surf-trips' || filter === 'trip') return 'trip';
+  // Normalized category key
+  const activeCategoryKey = activeDetailKey 
+    ? getCategoryKeyFromDetailKey(activeDetailKey)
+    : (selectedFilter || 'all');
+
+  const getNormalizedCategoryKey = (cat: string): string => {
+    if (cat === 'aula-avulso' || cat === 'single-lesson' || cat === 'single') return 'aula-avulso';
+    if (cat === 'packs' || cat === 'pack') return 'pack';
+    if (cat === 'mensalidades' || cat === 'monthly') return 'monthly';
+    if (cat === 'aulas-privadas' || cat === 'privadas' || cat === 'private') return 'private';
+    if (cat === 'grupos-adultos' || cat === 'group' || cat === 'aulas-grupo') return 'group';
+    if (cat === 'grupos-criancas' || cat === 'kids') return 'kids';
+    if (cat === 'erasmus' || cat === 'erasmus-residentes') return 'erasmus';
+    if (cat === 'aluguer' || cat === 'rental') return 'rental';
+    if (cat === 'campos-ferias' || cat === 'camp' || cat === 'campo-ferias') return 'camp';
+    if (cat === 'surf-trips' || cat === 'trip' || cat === 'surf-trip') return 'trip';
     return 'all';
   };
 
-  const normalizedFilter = getNormalizedFilter(selectedFilter || 'all');
-  const categoryInfo = CATEGORY_INFO_MAP[normalizedFilter] || CATEGORY_INFO_MAP['all'];
+  const normalizedCategory = getNormalizedCategoryKey(activeCategoryKey);
+  const categoryInfo = CATEGORY_INFO_MAP[normalizedCategory] || CATEGORY_INFO_MAP['all'];
 
   // Center active filter button in view when changed
   useEffect(() => {
@@ -177,7 +244,7 @@ export default function LessonsList({
       }
       setTimeout(updateScrollBounds, 350);
     }
-  }, [selectedFilter, normalizedFilter]);
+  }, [selectedFilter, activeDetailKey, normalizedCategory]);
 
   // Mouse Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -192,7 +259,7 @@ export default function LessonsList({
     if (!isMouseDown || !scrollContainerRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Drag scroll speed
+    const walk = (x - startX) * 1.5;
     if (Math.abs(walk) > 6) {
       setIsDragging(true);
     }
@@ -228,94 +295,99 @@ export default function LessonsList({
     if (lesson.serviceKey && SERVICE_DETAILS[lesson.serviceKey]) {
       return lesson.serviceKey;
     }
-    if (lesson.id === 'single-lesson' || lesson.category === 'group' || lesson.category === 'pack') {
-      return 'aulas-grupo';
+    if (lesson.id === 'single-lesson' || lesson.id === 'aula-avulso') {
+      return 'aula-avulso';
     }
     if (lesson.category === 'private' || lesson.id.includes('private')) {
-      return 'aulas-privadas';
+      return 'privadas';
+    }
+    if (lesson.category === 'pack' || lesson.id.includes('pack')) {
+      return 'packs';
     }
     if (lesson.category === 'monthly' || lesson.id.includes('monthly')) {
       return 'mensalidades';
     }
+    if (lesson.category === 'rental' || lesson.id.includes('rental')) {
+      return 'aluguer';
+    }
     if (lesson.category === 'kids' || lesson.id.includes('kids')) {
-      return 'kids';
+      return 'grupos-criancas';
     }
     if (lesson.category === 'erasmus' || lesson.id.includes('erasmus')) {
       return 'erasmus';
     }
     if (lesson.category === 'camp' || lesson.id.includes('camp')) {
-      return 'campo-ferias';
+      return 'campos-ferias';
     }
     if (lesson.category === 'trip' || lesson.id.includes('trip') || lesson.id.includes('wave')) {
-      return 'surf-trip';
+      return 'surf-trips';
     }
-    if (lesson.category === 'rental' || lesson.id.includes('rental')) {
-      return 'aluguer';
-    }
-    return 'aulas-grupo';
+    return 'grupos-adultos';
   };
 
+  // Clicking on a card's "Detalhes" or body
   const handleCardViewDetails = (lesson: Lesson) => {
     const detailKey = getDetailKeyForLesson(lesson);
-    setActiveDetailKey(detailKey);
+    updateActiveDetailKey(detailKey);
+    setSelectedFilter(getCategoryKeyFromDetailKey(detailKey));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Clicking on horizontal filter tabs
   const handleTabChange = (tabId: string) => {
-    setActiveDetailKey(null);
-    setSelectedFilter(tabId);
+    if (tabId === 'all') {
+      updateActiveDetailKey(null);
+      setSelectedFilter('all');
+    } else {
+      const targetDetailKey = getDetailKeyFromTabId(tabId);
+      updateActiveDetailKey(targetDetailKey);
+      setSelectedFilter(tabId);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Returning from detail view to all services grid
+  const handleBackToAllServices = () => {
+    updateActiveDetailKey(null);
+    setSelectedFilter('all');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Check if a specific tab is active
+  const isTabActive = (tabId: string): boolean => {
+    if (tabId === 'all') {
+      return activeDetailKey === null;
+    }
+    if (!activeDetailKey) return false;
+    const tabDetailKey = getDetailKeyFromTabId(tabId);
+    return tabDetailKey === activeDetailKey;
   };
 
   // Strictly filter and sort lessons based on the active selection
   const getFilteredLessons = (): Lesson[] => {
-    switch (normalizedFilter) {
-      case 'aula-avulso':
-        return LESSONS.filter(l => l.id === 'single-lesson');
-      case 'private':
-        return LESSONS.filter(l => l.category === 'private');
-      case 'pack':
-        return LESSONS.filter(l => l.category === 'pack');
-      case 'monthly':
-        return LESSONS.filter(l => l.category === 'monthly');
-      case 'rental':
-        return LESSONS.filter(l => l.category === 'rental');
-      case 'group':
-        return LESSONS.filter(l => l.id === 'single-lesson' || (l.category === 'group' && l.id !== 'kids-surf'));
-      case 'kids':
-        return LESSONS.filter(l => l.category === 'kids' || l.id === 'kids-surf');
-      case 'trip':
-        return LESSONS.filter(l => l.category === 'trip');
-      case 'erasmus':
-        return LESSONS.filter(l => l.category === 'erasmus');
-      case 'camp':
-        return LESSONS.filter(l => l.category === 'camp');
-      default: {
-        // When 'all', list all lessons ordered by the official SERVICES order
-        const orderedLessons: Lesson[] = [];
-        const seenIds = new Set<string>();
-        for (const service of SERVICES) {
-          const matchingLessons = LESSONS.filter(l => {
-            if (service.lessonIds && service.lessonIds.includes(l.id)) return true;
-            if (service.filterKey === 'aula-avulso' && l.id === 'single-lesson') return true;
-            if (service.filterKey === l.category) return true;
-            return false;
-          });
-          for (const lesson of matchingLessons) {
-            if (!seenIds.has(lesson.id)) {
-              seenIds.add(lesson.id);
-              orderedLessons.push(lesson);
-            }
-          }
+    const orderedLessons: Lesson[] = [];
+    const seenIds = new Set<string>();
+    for (const service of SERVICES) {
+      const matchingLessons = LESSONS.filter(l => {
+        if (service.lessonIds && service.lessonIds.includes(l.id)) return true;
+        if (service.filterKey === 'aula-avulso' && l.id === 'single-lesson') return true;
+        if (service.filterKey === l.category) return true;
+        return false;
+      });
+      for (const lesson of matchingLessons) {
+        if (!seenIds.has(lesson.id)) {
+          seenIds.add(lesson.id);
+          orderedLessons.push(lesson);
         }
-        for (const lesson of LESSONS) {
-          if (!seenIds.has(lesson.id)) {
-            seenIds.add(lesson.id);
-            orderedLessons.push(lesson);
-          }
-        }
-        return orderedLessons;
       }
     }
+    for (const lesson of LESSONS) {
+      if (!seenIds.has(lesson.id)) {
+        seenIds.add(lesson.id);
+        orderedLessons.push(lesson);
+      }
+    }
+    return orderedLessons;
   };
 
   const filteredLessons = getFilteredLessons();
@@ -332,14 +404,14 @@ export default function LessonsList({
               src={categoryInfo.bgImage} 
               alt={categoryInfo.title}
               className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 brightness-105 contrast-105 ${
-                normalizedFilter === 'rental' || normalizedFilter === 'pack' 
+                normalizedCategory === 'rental' || normalizedCategory === 'pack' 
                   ? 'object-[center_68%]' 
                   : 'object-center'
               }`}
             />
             {/* Reduced opacity overlay so all category images are vibrant and clearly visible */}
-            <div className="absolute inset-0 bg-black/15" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40" />
           </>
         ) : (
           <div className="absolute inset-0 bg-gradient-to-b from-[#08080a] via-[#101014] to-[#16161c]" />
@@ -392,11 +464,12 @@ export default function LessonsList({
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {FILTER_TABS.map((tab) => {
-                const isActive = !activeDetailKey && normalizedFilter === getNormalizedFilter(tab.id);
+                const active = isTabActive(tab.id);
                 return (
                   <button
                     key={tab.id}
-                    data-active={isActive ? 'true' : 'false'}
+                    id={`tab-service-${tab.id}`}
+                    data-active={active ? 'true' : 'false'}
                     onClick={(e) => {
                       if (isDragging) {
                         e.preventDefault();
@@ -405,8 +478,8 @@ export default function LessonsList({
                       handleTabChange(tab.id);
                     }}
                     className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 shrink-0 select-none cursor-pointer ${
-                      isActive
-                        ? 'bg-[#f18719] text-white shadow-md scale-105'
+                      active
+                        ? 'bg-[#f18719] text-white shadow-md scale-105 ring-2 ring-[#f18719]/40'
                         : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-white/20'
                     }`}
                   >
@@ -442,7 +515,7 @@ export default function LessonsList({
       {activeDetailKey && SERVICE_DETAILS[activeDetailKey] ? (
         <ServiceDetailView
           detail={SERVICE_DETAILS[activeDetailKey]}
-          onBack={() => setActiveDetailKey(null)}
+          onBack={handleBackToAllServices}
           onSelectLesson={onSelectLesson}
         />
       ) : (
@@ -453,10 +526,10 @@ export default function LessonsList({
             <div className="flex items-center justify-between mb-10 pb-4 border-b border-slate-200/80 text-left">
               <div>
                 <h2 className="text-xl sm:text-2xl font-black font-sans text-slate-950 uppercase tracking-tight">
-                  {categoryInfo.title}
+                  Todos os Serviços de Surf
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  {filteredLessons.length} {filteredLessons.length === 1 ? 'opção disponível' : 'opções disponíveis'}
+                  {filteredLessons.length} {filteredLessons.length === 1 ? 'modalidade disponível' : 'modalidades disponíveis'}
                 </p>
               </div>
 
@@ -481,9 +554,9 @@ export default function LessonsList({
             {/* If no lessons found */}
             {filteredLessons.length === 0 && (
               <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 p-8 space-y-4">
-                <p className="text-slate-600 font-medium">Nenhum serviço encontrado nesta categoria.</p>
+                <p className="text-slate-600 font-medium">Nenhum serviço encontrado.</p>
                 <button
-                  onClick={() => setSelectedFilter('all')}
+                  onClick={() => handleTabChange('all')}
                   className="bg-[#f18719] text-white font-bold text-xs uppercase px-6 py-3 rounded-xl cursor-pointer"
                 >
                   Ver Todos os Serviços
@@ -537,3 +610,4 @@ export default function LessonsList({
     </div>
   );
 }
+

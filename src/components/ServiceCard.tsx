@@ -132,7 +132,7 @@ export default function ServiceCard({ lesson, onReserve, onViewDetails }: Servic
             </div>
 
             <div className="flex items-center gap-1.5 sm:gap-2">
-              {onViewDetails && (
+              {onViewDetails && lesson.category !== 'monthly' && (
                 <button
                   id={`btn-details-card-${lesson.id}`}
                   onClick={() => onViewDetails(lesson)}
@@ -146,10 +146,16 @@ export default function ServiceCard({ lesson, onReserve, onViewDetails }: Servic
 
               <button
                 id={`btn-reservar-card-${lesson.id}`}
-                onClick={() => onReserve(lesson)}
+                onClick={() => {
+                  if (lesson.category === 'monthly' && onViewDetails) {
+                    onViewDetails(lesson);
+                  } else {
+                    onReserve(lesson);
+                  }
+                }}
                 className="bg-[#f18719] hover:bg-[#d9730c] text-white font-sans font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer active:scale-95 text-center shrink-0"
               >
-                RESERVAR
+                {lesson.category === 'monthly' ? 'QUERO INSCREVER-ME' : 'RESERVAR'}
               </button>
             </div>
           </div>
