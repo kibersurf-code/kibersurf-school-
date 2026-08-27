@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, CalendarDays, Globe, ChevronDown, ArrowRight } from 'lucide-react';
-import { LessonCategory } from '../types';
-import { KiberLogoIcon } from './KiberLogoIcon';
+import { Menu, X, CalendarDays, Globe, ChevronDown } from 'lucide-react';
+import { LessonCategory, GlobalService } from '../types';
+import { SERVICES } from '../data';
 
 interface NavbarProps {
   activeSection: string;
@@ -13,23 +13,8 @@ interface NavbarProps {
   onLogoClick?: () => void;
 }
 
-export interface NavServiceItem {
-  id: string;
-  name: string;
-}
-
-export const SERVICES_LIST: NavServiceItem[] = [
-  { id: 'aula-avulso', name: 'Aula Avulso' },
-  { id: 'aluguer', name: 'Aluguer' },
-  { id: 'mensalidades', name: 'Mensalidades' },
-  { id: 'packs', name: 'Packs' },
-  { id: 'grupos-adultos', name: 'Grupos Adultos' },
-  { id: 'grupos-criancas', name: 'Grupos Crianças' },
-  { id: 'surf-trips', name: 'Surf Trips' },
-  { id: 'erasmus', name: 'Erasmus' },
-  { id: 'aulas-privadas', name: 'Aulas Privadas' },
-  { id: 'campos-ferias', name: 'Campos de Férias' },
-];
+export type NavServiceItem = GlobalService;
+export const SERVICES_LIST: GlobalService[] = SERVICES;
 
 export default function Navbar({ 
   activeSection, 
@@ -92,38 +77,16 @@ export default function Navbar({
     setIsOpen(false);
     setIsServicesOpen(false);
 
-    if (serviceId === 'todas-aulas' || serviceId === 'aulas-surf') {
+    const foundService = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId);
+
+    if (foundService) {
+      if (setSelectedFilter) setSelectedFilter(foundService.filterKey);
+      setActiveSection('aulas');
+    } else if (serviceId === 'todas-aulas' || serviceId === 'aulas-surf' || serviceId === 'all') {
       if (setSelectedFilter) setSelectedFilter('all');
       setActiveSection('aulas');
-    } else if (serviceId === 'aula-avulso') {
-      if (setSelectedFilter) setSelectedFilter('aula-avulso');
-      setActiveSection('aulas');
-    } else if (serviceId === 'aluguer') {
-      if (setSelectedFilter) setSelectedFilter('rental');
-      setActiveSection('aulas');
-    } else if (serviceId === 'mensalidades') {
-      if (setSelectedFilter) setSelectedFilter('monthly');
-      setActiveSection('aulas');
-    } else if (serviceId === 'packs') {
-      if (setSelectedFilter) setSelectedFilter('pack');
-      setActiveSection('aulas');
-    } else if (serviceId === 'grupos-adultos' || serviceId === 'grupos') {
-      if (setSelectedFilter) setSelectedFilter('group');
-      setActiveSection('aulas');
-    } else if (serviceId === 'grupos-criancas') {
-      if (setSelectedFilter) setSelectedFilter('kids');
-      setActiveSection('aulas');
-    } else if (serviceId === 'surf-trips') {
-      if (setSelectedFilter) setSelectedFilter('trip');
-      setActiveSection('aulas');
-    } else if (serviceId === 'erasmus') {
-      if (setSelectedFilter) setSelectedFilter('erasmus');
-      setActiveSection('aulas');
-    } else if (serviceId === 'aulas-privadas') {
-      if (setSelectedFilter) setSelectedFilter('private');
-      setActiveSection('aulas');
-    } else if (serviceId === 'campos-ferias') {
-      if (setSelectedFilter) setSelectedFilter('camp');
+    } else {
+      if (setSelectedFilter) setSelectedFilter(serviceId);
       setActiveSection('aulas');
     }
 
@@ -149,27 +112,22 @@ export default function Navbar({
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-100 text-slate-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 sm:h-[110px]">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo Brand (Clickable -> Homepage & Reset Hero to "Vive o surf. Sente o mar.") */}
           <div 
             onClick={handleLogoClick} 
-            className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group select-none py-2"
+            className="flex items-center gap-2 cursor-pointer group select-none py-1"
             id="navbar-logo"
             title="Kiber Surf School - Vive o Surf. Sente o Mar."
           >
-            {/* Double Orange Chevrons logo mark */}
-            <div className="flex text-[#f18719] items-center shrink-0">
-              <KiberLogoIcon className="w-9 h-9 sm:w-11 sm:h-11 text-[#f18719] group-hover:scale-105 transition-transform" />
-            </div>
-            
-            {/* Word 'kiber' in bold lowercase */}
-            <span className="text-3xl sm:text-4xl font-black font-sans tracking-tighter text-slate-950 group-hover:text-[#f18719] transition-colors lowercase leading-none">
-              kiber
-            </span>
-
-            {/* Stacked 'surf school' next to it in lowercase */}
-            <div className="flex flex-col text-[11px] sm:text-xs font-medium leading-[1.05] text-slate-900 lowercase tracking-tight text-left pl-0.5 self-center">
+            <img
+              src="/logokiber.png"
+              alt="Kiber"
+              className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+            />
+            {/* Texto 'surf school' à frente do logótipo */}
+            <div className="flex flex-col text-[11px] sm:text-xs font-semibold leading-[1.05] text-slate-900 lowercase tracking-tight text-left self-center group-hover:text-[#f18719] transition-colors">
               <span>surf</span>
               <span>school</span>
             </div>
@@ -219,7 +177,7 @@ export default function Navbar({
                   id="dropdown-servicos"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="absolute top-[88px] left-0 bg-white border border-slate-100 rounded-2xl shadow-lg shadow-slate-200/50 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left w-64 min-w-[250px]"
+                  className="absolute top-full left-0 mt-1 bg-white border border-slate-100 rounded-2xl shadow-lg shadow-slate-200/50 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left w-64 min-w-[250px]"
                 >
                   <div className="space-y-0.5">
                     {SERVICES_LIST.map((service) => (
@@ -227,12 +185,11 @@ export default function Navbar({
                         key={service.id}
                         id={`nav-service-${service.id}`}
                         onClick={() => handleServiceClick(service.id)}
-                        className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13px] font-semibold text-slate-700 hover:text-[#f18719] hover:bg-orange-50/80 transition-all duration-150 text-left cursor-pointer group"
+                        className="w-full flex items-center px-3.5 py-2.5 rounded-xl text-[13px] font-semibold text-slate-700 hover:text-[#f18719] hover:bg-orange-50/80 transition-all duration-150 text-left cursor-pointer"
                       >
-                        <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150">
+                        <span className="tracking-normal">
                           {service.name}
                         </span>
-                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-150 text-[#f18719] shrink-0 ml-2" />
                       </button>
                     ))}
                   </div>
@@ -335,10 +292,9 @@ export default function Navbar({
                     key={service.id}
                     id={`mobile-nav-service-${service.id}`}
                     onClick={() => handleServiceClick(service.id)}
-                    className="flex items-center justify-between w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-[#f18719] hover:bg-orange-50/80 transition-colors"
+                    className="flex items-center w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-[#f18719] hover:bg-orange-50/80 transition-colors"
                   >
                     <span>{service.name}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#f18719]" />
                   </button>
                 ))}
               </div>

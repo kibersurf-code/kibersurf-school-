@@ -64,6 +64,12 @@ p, span, li, label, input, select, textarea, div.description, footer, .font-manr
   font-family: 'Manrope', var(--font-sans), sans-serif;
 }
 
+/* Links e botões do footer com tipografia idêntica Manrope regular */
+footer button, footer a, footer li {
+  font-family: 'Manrope', var(--font-sans), sans-serif !important;
+  font-weight: 400 !important;
+}
+
 /* Destaques numéricos de preços e badges principais -> Fredoka */
 .price-tag, .font-price, [data-price], .price-number {
   font-family: 'Fredoka', var(--font-heading), cursive, sans-serif;

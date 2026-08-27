@@ -20,7 +20,7 @@ export interface HeroSlideData {
 }
 
 export const HERO_SLIDES: HeroSlideData[] = [
-  // 1. Vive o surf. Sente o mar.
+  // 1. Main Welcome
   {
     id: 'main-hero',
     type: 'main',
@@ -31,7 +31,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     primaryBtnText: 'Reservar agora',
     secondaryBtnText: 'Ver aulas',
   },
-  // 2. Aula Avulso
+  // 1. Aula Avulso
   {
     id: 'aula-avulso',
     serviceId: 'aula-avulso',
@@ -45,40 +45,26 @@ export const HERO_SLIDES: HeroSlideData[] = [
     bgImage: '/avulso.jpg',
     icon: Waves,
   },
-  // 3. Aluguer
+  // 2. Privadas
   {
-    id: 'aluguer',
-    serviceId: 'aluguer',
+    id: 'privadas',
+    serviceId: 'aulas-privadas',
     type: 'service',
-    tagline: 'PRANCHAS & FATOS · MATOSINHOS',
-    title: 'Aluguer de',
-    titleHighlight: 'Equipamento',
-    description: 'Material de alta qualidade para desfrutares do mar ao teu ritmo. Softboards, pranchas duras de fibra e fatos 4/3mm.',
-    primaryBtnText: 'Catálogo de Aluguer',
-    secondaryBtnText: 'Ver Aulas',
-    bgImage: '/loja.jpg',
-    icon: Waves,
-  },
-  // 4. Mensalidades
-  {
-    id: 'mensalidades',
-    serviceId: 'mensalidades',
-    type: 'service',
-    tagline: 'EVOLUÇÃO CONTÍNUA · 1 A 3 VEZES POR SEMANA',
-    title: 'Mensalidades de',
+    tagline: 'COACHING EXCLUSIVO • 100% PERSONALIZADO',
+    title: 'Aulas Privadas de',
     titleHighlight: 'Surf',
-    description: 'Planos mensais com acompanhamento dedicado dos nossos treinadores certificados para uma evolução técnica consistente.',
-    primaryBtnText: 'Ver Planos Mensais',
-    secondaryBtnText: 'Agendar Aula',
-    bgImage: '/mensalidade.jpg',
-    icon: Waves,
+    description: 'Treino exclusivo com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
+    primaryBtnText: 'Ver Aulas Privadas',
+    secondaryBtnText: 'Saber Mais',
+    bgImage: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=2000&q=80',
+    icon: Compass,
   },
-  // 5. Packs
+  // 3. Packs de aulas
   {
     id: 'packs',
     serviceId: 'packs',
     type: 'service',
-    tagline: 'FLEXIBILIDADE TOTAL · PACKS 5 & 10 AULAS',
+    tagline: 'FLEXIBILIDADE TOTAL • PACKS DE AULAS',
     title: 'Packs de',
     titleHighlight: 'Aulas de Surf',
     description: 'Packs de aulas de surf para evoluíres ao teu ritmo com horários flexíveis, acompanhamento técnico e todo o equipamento incluído.',
@@ -87,7 +73,63 @@ export const HERO_SLIDES: HeroSlideData[] = [
     bgImage: '/packs.jpg',
     icon: Sparkles,
   },
-  // 6. Surf Trips
+  // 4. Mensalidades
+  {
+    id: 'mensalidades',
+    serviceId: 'mensalidades',
+    type: 'service',
+    tagline: 'EVOLUÇÃO CONTÍNUA • SURF & TREINO FUNCIONAL',
+    title: 'Mensalidades de',
+    titleHighlight: 'Surf',
+    description: 'Planos mensais com acompanhamento dedicado dos nossos treinadores certificados para uma evolução técnica consistente na Praia de Matosinhos.',
+    primaryBtnText: 'Ver Planos Mensais',
+    secondaryBtnText: 'Agendar Aula',
+    bgImage: '/mensalidade.jpg',
+    icon: Waves,
+  },
+  // 5. Aluguer
+  {
+    id: 'aluguer',
+    serviceId: 'aluguer',
+    type: 'service',
+    tagline: 'PRANCHAS & FATOS • MATOSINHOS',
+    title: 'Aluguer de',
+    titleHighlight: 'Equipamento',
+    description: 'Material de alta qualidade para desfrutares do mar ao teu ritmo. Softboards, pranchas duras de fibra e fatos térmicos de neoprene.',
+    primaryBtnText: 'Catálogo de Aluguer',
+    secondaryBtnText: 'Ver Aulas',
+    bgImage: '/loja.jpg',
+    icon: Waves,
+  },
+  // 6. Grupos Adultos
+  {
+    id: 'grupos-adultos',
+    serviceId: 'grupos-adultos',
+    type: 'service',
+    tagline: 'MÉTODO COLETIVO • TURMAS NIVELADAS',
+    title: 'Grupos',
+    titleHighlight: 'Adultos',
+    description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido.',
+    primaryBtnText: 'Saber mais',
+    secondaryBtnText: 'Ver Aulas',
+    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    icon: Users,
+  },
+  // 7. Grupos Crianças
+  {
+    id: 'grupos-criancas',
+    serviceId: 'grupos-criancas',
+    type: 'service',
+    tagline: 'KIDS & TEENS • 6 AOS 14 ANOS',
+    title: 'Grupos',
+    titleHighlight: 'Crianças',
+    description: 'Aulas desenhadas para os mais novos com foco total na segurança, diversão e aprendizagem com rácio reforçado de 1 instrutor para 4 alunos.',
+    primaryBtnText: 'Saber mais',
+    secondaryBtnText: 'Ver Aulas',
+    bgImage: '/criancas.jpg',
+    icon: Sun,
+  },
+  // 8. Surf Trips
   {
     id: 'surf-trips',
     serviceId: 'surf-trip',
@@ -95,36 +137,36 @@ export const HERO_SLIDES: HeroSlideData[] = [
     tagline: 'EXPERIÊNCIAS INTERNACIONAIS & THE WAVE',
     title: 'Kiber',
     titleHighlight: 'Surf Trips',
-    description: 'Viagens organizadas pela equipa Kiber para os melhores picos de surf e as melhores ondas artificiais do mundo.',
-    primaryBtnText: 'Explorar Surf Trips',
+    description: 'Viagens organizadas pela equipa Kiber para os melhores picos de surf e as melhores piscinas de ondas do mundo (The Wave Bristol).',
+    primaryBtnText: 'Calendário & Detalhes',
     secondaryBtnText: 'Ver Outros Serviços',
     bgImage: theWaveTripImg,
     icon: Compass,
   },
-  // 7. Erasmus e Crianças
+  // 9. Erasmus e Residentes
   {
-    id: 'erasmus-criancas',
+    id: 'erasmus',
     serviceId: 'erasmus',
     type: 'service',
-    tagline: 'ERASMUS, ADULTOS & CRIANÇAS',
+    tagline: 'COMUNIDADE INTERNACIONAL • UNIVERSITÁRIOS',
     title: 'Erasmus &',
-    titleHighlight: 'Crianças',
-    description: 'Junta-te à nossa comunidade com aulas dedicadas a estudantes universitários internacionais e turmas para os mais novos.',
-    primaryBtnText: 'Ver Aulas Erasmus & Grupos',
+    titleHighlight: 'Residentes',
+    description: 'Tarifas e condições especiais para estudantes internacionais no Porto. Treinadores multilingues e integração na comunidade Kiber.',
+    primaryBtnText: 'Saber mais',
     secondaryBtnText: 'Contactar Escola',
     bgImage: '/eramus.jpg',
     icon: Users,
   },
-  // 8. Campos de Férias
+  // 10. Campos de Férias
   {
     id: 'campos-ferias',
     serviceId: 'campo-ferias',
     type: 'service',
-    tagline: 'KIDS & TEENS · FÉRIAS ESCOLARES',
+    tagline: 'KIDS & TEENS • FÉRIAS ESCOLARES',
     title: 'Campos de',
     titleHighlight: 'Férias',
-    description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e diversão na Praia de Matosinhos.',
-    primaryBtnText: 'Saber Mais & Inscrições',
+    description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e diversão na Praia de Matosinhos com supervisão contínua.',
+    primaryBtnText: 'Saber mais & Inscrições',
     secondaryBtnText: 'Ver Todas as Aulas',
     bgImage: '/criancas.jpg',
     icon: Sun,
@@ -424,6 +466,13 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                   }}
                 />
 
+                {/* Fallback poster image underneath video */}
+                <img
+                  src="/hero_video_poster.jpg"
+                  alt="Surf Matosinhos"
+                  className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-100"
+                />
+
                 {/* Background Video */}
                 <video
                   ref={videoRef}
@@ -432,16 +481,12 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                   muted
                   playsInline
                   preload="auto"
+                  poster="/hero_video_poster.jpg"
                   className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-100"
                   style={{ objectPosition: 'center center' }}
                 >
                   <source src="/video.mp4" type="video/mp4" />
                   <source src="/IMG_2047.mp4" type="video/mp4" />
-                  <source src="/IMG_2047.MOV" type="video/quicktime" />
-                  <source 
-                    src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054273b161c6b16955a6d2b6eb5051e&profile_id=139&oauth2_token_id=57447761" 
-                    type="video/mp4" 
-                  />
                 </video>
 
                 {/* Light & Balanced Overlays */}

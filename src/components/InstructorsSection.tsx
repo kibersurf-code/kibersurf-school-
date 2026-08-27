@@ -1,6 +1,6 @@
 import React from 'react';
 import { INSTRUCTORS } from '../data';
-import { Star, Navigation, Volume2, Calendar, Award, Users } from 'lucide-react';
+import { Navigation, Calendar, Users } from 'lucide-react';
 
 interface InstructorsSectionProps {
   onAgendarClick?: () => void;
@@ -50,12 +50,6 @@ export default function InstructorsSection({ onAgendarClick }: InstructorsSectio
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                
-                {/* Float Rating Badge */}
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-100 flex items-center gap-1 shadow-sm">
-                  <Star className="w-4 h-4 text-[#f18719] fill-[#f18719]" />
-                  <span className="text-xs font-mono font-bold text-slate-800">{coach.rating.toFixed(1)}</span>
-                </div>
 
                 <div className="absolute bottom-4 left-4 right-4 text-left">
                   <span className="text-xs font-mono font-bold text-[#f18719] tracking-wider uppercase block">
@@ -68,7 +62,7 @@ export default function InstructorsSection({ onAgendarClick }: InstructorsSectio
               </div>
 
               {/* Coach Bio & Info */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-6 text-left">
+              <div className="p-6 flex-1 flex flex-col justify-between space-y-4 text-left">
                 <div className="space-y-4">
                   <div>
                     <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
@@ -83,25 +77,6 @@ export default function InstructorsSection({ onAgendarClick }: InstructorsSectio
                     {coach.bio}
                   </p>
                 </div>
-
-                {/* Footer specs - languages */}
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
-                  <div className="flex items-center gap-1.5">
-                    <Volume2 className="w-4 h-4 text-[#f18719]" />
-                    <span className="text-slate-500 font-bold">Idiomas:</span>
-                  </div>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {coach.languages.map((lang, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-slate-50 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200 text-[10px] font-bold"
-                      >
-                        {lang}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
               </div>
 
             </div>

@@ -1,12 +1,207 @@
-import { Lesson, Instructor, TimeSlot, ServiceDetailItem } from './types';
+import { Lesson, Instructor, TimeSlot, ServiceDetailItem, GlobalService } from './types';
 import kidSurferActionImg from './assets/images/kid_surfer_action_1784797541296.jpg';
 import kidsSurfingCampImg from './assets/images/kids_surfing_camp_1784797523248.jpg';
 import theWaveBristolImg from './assets/images/the_wave_bristol_trip_1784800173484.jpg';
 import helderCoachImg from './assets/images/helder_coach_1786702791278.jpg';
 import gonzagaCoachImg from './assets/images/gonzaga_coach_1786702802220.jpg';
 import gersonCoachImg from './assets/images/gerson_coach_1786702814096.jpg';
-import joaoVaraoCoachImg from './assets/images/joao_varao_coach_1786702839874.jpg';
 import nunoPintoCoachImg from './assets/images/nuno_pinto_coach_1786702851696.jpg';
+
+/**
+ * Ordem oficial dos serviços da KIBER SURF SCHOOL (Fonte única global da verdade):
+ * 1. Aula Avulso (Desde 30€)
+ * 2. Privadas (Desde 55€)
+ * 3. Packs de aulas (Desde 80€)
+ * 4. Mensalidades (Desde 65€/mês)
+ * 5. Aluguer (Desde 10€)
+ * 6. Grupos Adultos (CTA: Saber mais)
+ * 7. Grupos Crianças (CTA: Saber mais)
+ * 8. Surf Trips (CTA: Calendário)
+ * 9. Erasmus e Residentes (CTA: Saber mais)
+ * 10. Campos de Férias (CTA: Saber mais)
+ */
+export const SERVICES: GlobalService[] = [
+  {
+    id: 'aula-avulso',
+    name: 'Aula Avulso',
+    priceLabel: 'Desde 30€',
+    label: 'Desde 30€',
+    cta: 'Saber mais',
+    slug: 'aula-avulso',
+    filterKey: 'aula-avulso',
+    serviceKey: 'aulas-grupo',
+    tagline: 'Sessão individual com prancha, fato de neoprene e seguro desportivo incluídos',
+    description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
+    badge: 'Iniciação & Aperfeiçoamento',
+    image: '/avulso.jpg',
+    duration: '2 Horas',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'single-lesson',
+    lessonIds: ['single-lesson'],
+    techTouch: 'Análise de postura na areia e feedback instantâneo'
+  },
+  {
+    id: 'privadas',
+    name: 'Privadas',
+    priceLabel: 'Desde 55€',
+    label: 'Desde 55€',
+    cta: 'Saber mais',
+    slug: 'privadas',
+    filterKey: 'private',
+    serviceKey: 'aulas-privadas',
+    tagline: 'Treino exclusivo 1-a-1 ou 2 pessoas com acompanhamento dedicado',
+    description: 'O caminho mais rápido e focado para o teu desenvolvimento no surf. Instrutor dedicado com análise técnica personalizada e correções imediatas dentro e fora de água.',
+    badge: 'Coaching 100% Exclusivo',
+    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=800&q=80',
+    duration: '2 Horas',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'private-1-person',
+    lessonIds: ['private-1-person', 'private-2-people'],
+    techTouch: 'Feedback em tempo real e foco pedagógico customizado'
+  },
+  {
+    id: 'packs',
+    name: 'Packs de aulas',
+    priceLabel: 'Desde 80€',
+    label: 'Desde 80€',
+    cta: 'Saber mais',
+    slug: 'packs',
+    filterKey: 'pack',
+    serviceKey: 'aulas-grupo',
+    tagline: 'Packs flexíveis de 3, 5 e 10 sessões com validade alargada',
+    description: 'Packs de aulas de surf para evoluíres ao teu ritmo com horários flexíveis de acordo com as marés, acompanhamento técnico e todo o equipamento incluído.',
+    badge: 'Melhor Valor',
+    image: '/packs.jpg',
+    duration: '3 a 10 Aulas',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'pack-3-lessons',
+    lessonIds: ['pack-3-lessons', 'pack-5-lessons', 'pack-10-lessons'],
+    techTouch: 'Plano de progresso estruturado e flexibilidade de marcação'
+  },
+  {
+    id: 'mensalidades',
+    name: 'Mensalidades',
+    priceLabel: 'Desde 65€/mês',
+    label: 'Desde 65€/mês',
+    cta: 'Saber mais',
+    slug: 'mensalidades',
+    filterKey: 'monthly',
+    serviceKey: 'mensalidades',
+    tagline: 'Planos mensais de surf e preparação física funcional',
+    description: 'Faz do surf parte da tua rotina semanal com planos de treino regulares estruturados no mar e treinos funcionais de preparação física e reforço corporal.',
+    badge: 'Evolução Contínua',
+    image: '/mensalidade.jpg',
+    duration: '1 Mês (Renovável)',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'monthly-1x-surf',
+    lessonIds: ['monthly-1x-surf', 'monthly-2x-surf', 'monthly-1x-funcional', 'monthly-1x-surf-1x-funcional', 'monthly-2x-surf-1x-funcional'],
+    techTouch: 'Plano de evolução individualizado desenhado pela escola'
+  },
+  {
+    id: 'aluguer',
+    name: 'Aluguer',
+    priceLabel: 'Desde 10€',
+    label: 'Desde 10€',
+    cta: 'Saber mais',
+    slug: 'aluguer',
+    filterKey: 'rental',
+    serviceKey: 'aluguer',
+    tagline: 'Pranchas soft e epoxy, fatos térmicos e transporte direto até à praia',
+    description: 'Aluguer de equipamento de topo na Praia de Matosinhos. Pranchas soft-foam para iniciantes, pranchas duras de fibra/epoxy e fatos térmicos higienizados.',
+    badge: 'Material Oficial FPS',
+    image: '/loja.jpg',
+    duration: '1h a 1 Dia',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'rental-board-wetsuit-1h',
+    lessonIds: ['rental-board-wetsuit-1h', 'rental-board-wetsuit-2h', 'rental-board-wetsuit-transport-2h', 'rental-board-wetsuit-4h', 'rental-board-wetsuit-1day', 'rental-board-1h', 'rental-wetsuit-1h'],
+    techTouch: 'Fatos higienizados e aconselhamento de litragem e marés'
+  },
+  {
+    id: 'grupos-adultos',
+    name: 'Grupos Adultos',
+    cta: 'Saber mais',
+    slug: 'grupos-adultos',
+    filterKey: 'group',
+    serviceKey: 'aulas-grupo',
+    tagline: 'Aulas em grupo dinâmicas com turmas niveladas',
+    description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador).',
+    badge: 'Espírito de Equipa',
+    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    duration: '2 Horas',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'single-lesson',
+    lessonIds: ['single-lesson', 'pack-3-lessons', 'pack-5-lessons', 'pack-10-lessons', 'surf-guide'],
+    techTouch: 'Rácio reduzido e turmas niveladas por experiência'
+  },
+  {
+    id: 'grupos-criancas',
+    name: 'Grupos Crianças',
+    cta: 'Saber mais',
+    slug: 'grupos-criancas',
+    filterKey: 'kids',
+    serviceKey: 'kids',
+    tagline: 'Aulas desenhadas para os 6 aos 14 anos com foco em segurança',
+    description: 'Aulas especialmente desenhadas para os mais jovens, combinando diversão, pedagogia adaptada e rácio reduzido de segurança no mar (1 treinador para 4 alunos).',
+    badge: 'Kids & Teens • 6 aos 14 Anos',
+    image: '/criancas.jpg',
+    duration: '1h 45m',
+    level: '6 aos 14 Anos',
+    primaryLessonId: 'kids-surf',
+    lessonIds: ['kids-surf'],
+    techTouch: 'Rácio reforçado de segurança na água (1:4)'
+  },
+  {
+    id: 'surf-trips',
+    name: 'Surf Trips',
+    cta: 'Calendário',
+    slug: 'surf-trips',
+    filterKey: 'trip',
+    serviceKey: 'surf-trip',
+    tagline: 'Viagens guiadas e fins de semana intensivos em piscina de ondas',
+    description: 'Viagens organizadas pela equipa Kiber para os melhores picos e piscinas de ondas do mundo (The Wave Bristol) com coaching técnico e vídeo-análise.',
+    badge: 'The Wave Bristol & Expedições',
+    image: theWaveBristolImg,
+    duration: 'Fim de Semana (3 Dias)',
+    level: 'Intermédio ao Avançado',
+    primaryLessonId: 'surftrip-bristol-member',
+    lessonIds: ['surftrip-bristol-member', 'surftrip-bristol-general'],
+    techTouch: 'Ondas mecânicas perfeitas e repetição técnica com vídeo-análise'
+  },
+  {
+    id: 'erasmus',
+    name: 'Erasmus e Residentes',
+    cta: 'Saber mais',
+    slug: 'erasmus',
+    filterKey: 'erasmus',
+    serviceKey: 'erasmus',
+    tagline: 'Tarifas e condições especiais para a comunidade académica e internacional',
+    description: 'Condições e tarifas exclusivas para estudantes universitários e internacionais no Porto. Treinadores multilingues e integração na vibrante comunidade Kiber.',
+    badge: 'Comunidade Internacional',
+    image: '/eramus.jpg',
+    duration: '2 Horas',
+    level: 'Todos os Níveis',
+    primaryLessonId: 'erasmus-lesson-2h',
+    lessonIds: ['rental-board-wetsuit-2h-erasmus', 'erasmus-lesson-2h', 'erasmus-pack-3'],
+    techTouch: 'Treinadores multilingues e integração na comunidade Kiber'
+  },
+  {
+    id: 'campos-ferias',
+    name: 'Campos de Férias',
+    cta: 'Saber mais',
+    slug: 'campos-ferias',
+    filterKey: 'camp',
+    serviceKey: 'campo-ferias',
+    tagline: 'Programas diários e semanais de Verão com surf, almoço e praia',
+    description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua (6 aos 16 anos).',
+    badge: 'Campos de Férias • 6 aos 16 Anos',
+    image: '/campodeferias.jpg',
+    duration: 'Diário ou 1 Semana',
+    level: '6 aos 16 Anos',
+    primaryLessonId: 'camp-week-lunch',
+    lessonIds: ['camp-week-lunch', 'camp-week-no-lunch', 'camp-day-lunch', 'camp-day-no-lunch'],
+    techTouch: 'Supervisão pedagógica 100% permanente por monitores credenciados'
+  }
+];
 
 export const LESSONS: Lesson[] = [
   {
@@ -623,7 +818,8 @@ export const INSTRUCTORS: Instructor[] = [
     specialty: 'Segurança no Mar, Gestão de Correntes & Aulas Privadas Intensivas',
     bio: 'Conhecedor profundo do mar de Matosinhos, o João Varão destaca-se pela atenção ao detalhe e pela confiança que transmite. Especialista em adaptar o treino às necessidades e ritmo de cada aluno em sessões personalizadas.',
     rating: 4.9,
-    image: joaoVaraoCoachImg,
+    image: '/joao_varao.jpg',
+    imagePosition: 'center 15%',
     languages: ['Português', 'Inglês']
   },
   {

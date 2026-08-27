@@ -11,9 +11,8 @@ import ContactSection from './components/ContactSection';
 import CampPage from './components/CampPage';
 import TripPage from './components/TripPage';
 import AulasSurfHome from './components/AulasSurfHome';
-import { KiberLogoIcon } from './components/KiberLogoIcon';
 import { Lesson, Booking, LessonCategory } from './types';
-import { LESSONS } from './data';
+import { LESSONS, SERVICES } from './data';
 import { Compass, Waves, MessageCircle, Instagram, Facebook, Phone, Mail } from 'lucide-react';
 
 export default function App() {
@@ -73,35 +72,18 @@ export default function App() {
   };
 
   const handleServiceNavigation = (serviceId: string) => {
-    if (serviceId === 'campo-ferias' || serviceId === 'campos-ferias') {
+    const found = SERVICES.find(s => s.id === serviceId || s.slug === serviceId || s.filterKey === serviceId);
+    if (found) {
+      setSelectedFilter(found.filterKey as any);
+      navigateToSection('aulas');
+    } else if (serviceId === 'campo-ferias' || serviceId === 'campos-ferias') {
       setSelectedFilter('camp');
       navigateToSection('aulas');
     } else if (serviceId === 'surf-trip' || serviceId === 'surf-trips') {
       setSelectedFilter('trip');
       navigateToSection('aulas');
-    } else if (serviceId === 'aluguer') {
-      setSelectedFilter('rental');
-      navigateToSection('aulas');
-    } else if (serviceId === 'aula-avulso') {
-      setSelectedFilter('aula-avulso');
-      navigateToSection('aulas');
-    } else if (serviceId === 'mensalidades') {
-      setSelectedFilter('monthly');
-      navigateToSection('aulas');
-    } else if (serviceId === 'packs') {
-      setSelectedFilter('pack');
-      navigateToSection('aulas');
     } else if (serviceId === 'aulas-privadas') {
       setSelectedFilter('private');
-      navigateToSection('aulas');
-    } else if (serviceId === 'grupos-adultos') {
-      setSelectedFilter('group');
-      navigateToSection('aulas');
-    } else if (serviceId === 'grupos-criancas') {
-      setSelectedFilter('kids');
-      navigateToSection('aulas');
-    } else if (serviceId === 'erasmus') {
-      setSelectedFilter('erasmus');
       navigateToSection('aulas');
     } else {
       setSelectedFilter('all');
@@ -169,6 +151,8 @@ export default function App() {
             {/* Secção Sobre Nós colocada logo a seguir ao Carrossel Hero */}
             <AboutSection 
               showHeaderBanner={false}
+              showStaffButton={true}
+              showFacilities={false}
               onConheceStaffClick={handleConheceStaff}
             />
 
@@ -194,6 +178,9 @@ export default function App() {
         {(activeSection === 'sobre' || activeSection === 'staff' || activeSection === 'instrutores') && (
           <>
             <AboutSection 
+              showHeaderBanner={true}
+              showStaffButton={false}
+              showFacilities={true}
               onConheceStaffClick={handleConheceStaff}
             />
             <InstructorsSection 
@@ -286,7 +273,7 @@ export default function App() {
               <h4 className="font-extrabold text-[#f18719] text-sm uppercase tracking-wider font-sans">
                 Contactos
               </h4>
-              <div className="space-y-2.5 text-slate-300 font-medium">
+              <div className="space-y-2.5 text-slate-300 text-sm font-normal">
                 <a 
                   href="tel:00351932785146" 
                   className="flex items-center gap-2.5 hover:text-[#f18719] transition-colors"
@@ -340,8 +327,8 @@ export default function App() {
               <h4 className="font-extrabold text-[#f18719] text-sm uppercase tracking-wider font-sans">
                 Morada
               </h4>
-              <div className="space-y-1 text-slate-300 leading-relaxed">
-                <p className="font-medium text-white">Kiber Surf School</p>
+              <div className="space-y-1 text-slate-300 text-sm font-normal leading-relaxed">
+                <p>Kiber Surf School</p>
                 <p>Rua Carlos de Carvalho, 28 R/C</p>
                 <p>4450-094 Matosinhos</p>
                 <p>Porto, Portugal</p>
@@ -353,27 +340,27 @@ export default function App() {
               <h4 className="font-extrabold text-[#f18719] text-sm uppercase tracking-wider font-sans">
                 Links Úteis
               </h4>
-              <ul className="space-y-2 text-slate-300">
+              <ul className="space-y-2 text-slate-300 text-sm font-normal">
                 <li>
-                  <button onClick={() => navigateToSection('sobre')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  <button onClick={() => navigateToSection('sobre')} className="font-normal text-slate-300 hover:text-white transition-colors cursor-pointer text-left">
                     Sobre Nós &amp; Equipa
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => navigateToSection('aulas')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  <button onClick={() => navigateToSection('aulas')} className="font-normal text-slate-300 hover:text-white transition-colors cursor-pointer text-left">
                     Aulas &amp; Serviços
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => navigateToSection('contacto')} className="hover:text-white transition-colors cursor-pointer text-left">
+                  <button onClick={() => navigateToSection('contacto')} className="font-normal text-slate-300 hover:text-white transition-colors cursor-pointer text-left">
                     Contactos &amp; Localização
                   </button>
                 </li>
                 <li>
-                  <a href="#_" className="hover:text-white transition-colors">Termos e Condições</a>
+                  <a href="#_" className="font-normal text-slate-300 hover:text-white transition-colors">Termos e Condições</a>
                 </li>
                 <li>
-                  <a href="#_" className="hover:text-white transition-colors">Livro de Reclamações</a>
+                  <a href="#_" className="font-normal text-slate-300 hover:text-white transition-colors">Livro de Reclamações</a>
                 </li>
               </ul>
             </div>

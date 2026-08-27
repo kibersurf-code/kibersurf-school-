@@ -1,5 +1,26 @@
 export type LessonCategory = 'group' | 'private' | 'pack' | 'rental' | 'trip' | 'monthly' | 'guide' | 'camp' | 'erasmus' | 'kids' | 'aula-avulso' | 'all';
 
+export interface GlobalService {
+  id: string;
+  name: string;
+  priceLabel?: string;
+  label?: string;
+  cta: string;
+  slug: string;
+  href?: string;
+  filterKey: string;
+  serviceKey?: string;
+  tagline: string;
+  description: string;
+  badge?: string;
+  image: string;
+  duration?: string;
+  level?: string;
+  primaryLessonId?: string;
+  lessonIds?: string[];
+  techTouch?: string;
+}
+
 export interface Lesson {
   id: string;
   category: LessonCategory;

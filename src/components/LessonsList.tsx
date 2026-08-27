@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LESSONS, SERVICE_DETAILS } from '../data';
+import { LESSONS, SERVICE_DETAILS, SERVICES } from '../data';
 import { Lesson, LessonCategory } from '../types';
 import { ShieldCheck, Star, SlidersHorizontal, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import ServiceCard from './ServiceCard';
@@ -28,6 +28,13 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     countLabel: 'Aula Avulsa',
     bgImage: '/avulso.jpg',
   },
+  'private': {
+    title: 'PRIVADAS',
+    badge: 'Coaching Exclusivo • 100% Personalizado',
+    description: 'Treino 1-para-1 ou em dupla com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
+    countLabel: 'Aulas Privadas',
+    bgImage: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=2000&q=80',
+  },
   'pack': {
     title: 'PACKS DE AULAS',
     badge: 'Aulas de Surf • Packs Económicos',
@@ -42,54 +49,47 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     countLabel: 'Mensalidades',
     bgImage: '/mensalidade.jpg',
   },
-  'private': {
-    title: 'AULAS PRIVADAS',
-    badge: 'Coaching Exclusivo • 100% Personalizado',
-    description: 'Treino 1-para-1 ou em dupla com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
-    countLabel: 'Aulas Privadas',
-    bgImage: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=2000&q=80',
+  'rental': {
+    title: 'ALUGUER',
+    badge: 'Material Técnico • Praia de Matosinhos',
+    description: 'Aluguer de pranchas de surf de alta flutuação ou fibra/epoxy e fatos térmicos de neoprene de última geração. Balneários com duches quentes incluídos.',
+    countLabel: 'Opções de Aluguer',
+    bgImage: '/loja.jpg',
   },
   'group': {
-    title: 'AULAS DE GRUPO',
+    title: 'GRUPOS ADULTOS',
     badge: 'Método Coletivo • Praia de Matosinhos',
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador).',
     countLabel: 'Aulas de Grupo',
     bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
   },
   'kids': {
-    title: 'KIBER KIDS & TEENS',
+    title: 'GRUPOS CRIANÇAS',
     badge: 'Kids & Teens • 6 aos 14 Anos',
     description: 'Aulas desenhadas para os mais novos com foco total na segurança, diversão e aprendizagem do respeito pelo oceano com rácio reduzido (1 treinador para 4 alunos).',
     countLabel: 'Opções Kids',
     bgImage: '/criancas.jpg',
   },
+  'trip': {
+    title: 'SURF TRIPS',
+    badge: 'Expedição Técnica • The Wave Bristol',
+    description: 'Fins de semana intensivos de evolução em piscina de ondas artificiais de classe mundial com vídeo-análise frame-a-frame e coaching de alto rendimento.',
+    countLabel: 'Surf Trips',
+    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+  },
   'erasmus': {
-    title: 'ERASMUS SURF EXPERIENCE',
+    title: 'ERASMUS E RESIDENTES',
     badge: 'Comunidade Internacional • Descontos Erasmus',
     description: 'Condições e tarifas exclusivas para estudantes universitários e internacionais no Porto. Treinadores multilingues e integração na comunidade Kiber.',
     countLabel: 'Opções Erasmus',
     bgImage: '/eramus.jpg',
   },
-  'rental': {
-    title: 'ALUGUER DE EQUIPAMENTO',
-    badge: 'Material Técnico • Praia de Matosinhos',
-    description: 'Aluguer de pranchas de surf de alta flutuação ou fibra/epoxy e fatos térmicos de neoprene de última geração. Balneários com duches quentes incluídos.',
-    countLabel: 'Opções de Aluguer',
-    bgImage: '/loja.jpg',
-  },
   'camp': {
-    title: 'CAMPOS DE FÉRIAS DE SURF',
+    title: 'CAMPOS DE FÉRIAS',
     badge: 'Campos de Férias • 6 aos 16 Anos',
     description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua.',
     countLabel: 'Campos de Férias',
     bgImage: '/criancas.jpg',
-  },
-  'trip': {
-    title: 'SURF TRIPS & EXPEDIÇÕES',
-    badge: 'Expedição Técnica • The Wave Bristol',
-    description: 'Fins de semana intensivos de evolução em piscina de ondas artificiais de classe mundial com vídeo-análise frame-a-frame e coaching de alto rendimento.',
-    countLabel: 'Surf Trips',
-    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
   },
   'all': {
     title: 'AULAS DE SURF & SERVIÇOS',
@@ -217,19 +217,10 @@ export default function LessonsList({
     }
   };
 
-  // Filter definitions for category tabs
+  // Filter definitions for category tabs strictly derived from global SERVICES
   const FILTER_TABS: { id: string; label: string }[] = [
     { id: 'all', label: 'Todos os Serviços' },
-    { id: 'aula-avulso', label: 'Aula Avulso' },
-    { id: 'pack', label: 'Packs' },
-    { id: 'monthly', label: 'Mensalidades' },
-    { id: 'private', label: 'Aulas Privadas' },
-    { id: 'group', label: 'Grupos Adultos' },
-    { id: 'kids', label: 'Kiber Kids' },
-    { id: 'erasmus', label: 'Erasmus' },
-    { id: 'rental', label: 'Aluguer' },
-    { id: 'camp', label: 'Campos de Férias' },
-    { id: 'trip', label: 'Surf Trips' },
+    ...SERVICES.map(s => ({ id: s.filterKey, label: s.name }))
   ];
 
   // Map lesson to its corresponding detail key
@@ -275,31 +266,55 @@ export default function LessonsList({
     setSelectedFilter(tabId);
   };
 
-  // Strictly filter lessons based on the active selection
+  // Strictly filter and sort lessons based on the active selection
   const getFilteredLessons = (): Lesson[] => {
     switch (normalizedFilter) {
       case 'aula-avulso':
         return LESSONS.filter(l => l.id === 'single-lesson');
+      case 'private':
+        return LESSONS.filter(l => l.category === 'private');
       case 'pack':
         return LESSONS.filter(l => l.category === 'pack');
       case 'monthly':
         return LESSONS.filter(l => l.category === 'monthly');
-      case 'private':
-        return LESSONS.filter(l => l.category === 'private');
+      case 'rental':
+        return LESSONS.filter(l => l.category === 'rental');
       case 'group':
         return LESSONS.filter(l => l.id === 'single-lesson' || (l.category === 'group' && l.id !== 'kids-surf'));
       case 'kids':
         return LESSONS.filter(l => l.category === 'kids' || l.id === 'kids-surf');
-      case 'erasmus':
-        return LESSONS.filter(l => l.category === 'erasmus');
-      case 'rental':
-        return LESSONS.filter(l => l.category === 'rental');
-      case 'camp':
-        return LESSONS.filter(l => l.category === 'camp');
       case 'trip':
         return LESSONS.filter(l => l.category === 'trip');
-      default:
-        return LESSONS;
+      case 'erasmus':
+        return LESSONS.filter(l => l.category === 'erasmus');
+      case 'camp':
+        return LESSONS.filter(l => l.category === 'camp');
+      default: {
+        // When 'all', list all lessons ordered by the official SERVICES order
+        const orderedLessons: Lesson[] = [];
+        const seenIds = new Set<string>();
+        for (const service of SERVICES) {
+          const matchingLessons = LESSONS.filter(l => {
+            if (service.lessonIds && service.lessonIds.includes(l.id)) return true;
+            if (service.filterKey === 'aula-avulso' && l.id === 'single-lesson') return true;
+            if (service.filterKey === l.category) return true;
+            return false;
+          });
+          for (const lesson of matchingLessons) {
+            if (!seenIds.has(lesson.id)) {
+              seenIds.add(lesson.id);
+              orderedLessons.push(lesson);
+            }
+          }
+        }
+        for (const lesson of LESSONS) {
+          if (!seenIds.has(lesson.id)) {
+            seenIds.add(lesson.id);
+            orderedLessons.push(lesson);
+          }
+        }
+        return orderedLessons;
+      }
     }
   };
 
