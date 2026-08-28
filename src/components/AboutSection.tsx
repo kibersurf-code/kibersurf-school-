@@ -86,7 +86,7 @@ export default function AboutSection({
   const isStaffButtonVisible = showStaffButton !== undefined ? showStaffButton : !showHeaderBanner;
   const isFacilitiesVisible = showFacilities !== undefined ? showFacilities : showHeaderBanner;
   const fallbackImage = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80';
-  const headerBannerImage = '/ofotografoluan_25.07.26_afternoon_fotos_luan8958_744683_296413.jpg';
+  const headerBannerImage = '/matosinhos.png';
   const aboutImage = '/about.jpg';
 
   return (
@@ -94,7 +94,7 @@ export default function AboutSection({
       
       {/* 1. HEADER BANNER COM IMAGEM & TÍTULO "SOBRE NÓS" (Condicional) */}
       {showHeaderBanner && (
-        <div className="relative h-[260px] sm:h-[320px] md:h-[360px] w-full overflow-hidden flex items-center justify-center bg-slate-950">
+        <div className="relative h-[280px] sm:h-[350px] md:h-[400px] w-full overflow-hidden flex items-center justify-center bg-slate-950">
           <img 
             src={headerBannerImage} 
             alt="Sobre Nós - Kiber Surf School Matosinhos"
@@ -104,7 +104,7 @@ export default function AboutSection({
                 target.src = fallbackImage;
               }
             }}
-            className="absolute inset-0 w-full h-full object-cover object-center scale-105 brightness-105 contrast-105 transition-transform duration-1000"
+            className="absolute inset-0 w-full h-full object-cover object-[center_75%] scale-105 brightness-105 contrast-105 transition-transform duration-1000"
           />
           {/* Soft overlay for crisp legibility and bright image visibility */}
           <div className="absolute inset-0 bg-black/20" />

@@ -28,7 +28,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Aulas de Surf • Sessão Individual',
     description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
     countLabel: 'Aula Avulsa',
-    bgImage: '/avulsonovo.jpeg',
+    bgImage: '/avulsomatosinhos.jpg',
   },
   'private': {
     title: 'PRIVADAS',
@@ -56,21 +56,21 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Material Técnico • Praia de Matosinhos',
     description: 'Aluguer de pranchas de surf de alta flutuação ou fibra/epoxy e fatos térmicos de neoprene de última geração. Balneários com duches quentes incluídos.',
     countLabel: 'Opções de Aluguer',
-    bgImage: '/loja.jpg',
+    bgImage: '/storebord.png',
   },
   'group': {
     title: 'GRUPOS ADULTOS',
     badge: 'Método Coletivo • Praia de Matosinhos',
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador).',
     countLabel: 'Aulas de Grupo',
-    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    bgImage: '/picture2.jpg',
   },
   'kids': {
     title: 'GRUPOS CRIANÇAS',
     badge: 'Kids & Teens • 6 aos 14 Anos',
     description: 'Aulas desenhadas para os mais novos com foco total na segurança, diversão e aprendizagem do respeito pelo oceano com rácio reduzido (1 treinador para 4 alunos).',
     countLabel: 'Opções Kids',
-    bgImage: '/criancas.jpg',
+    bgImage: '/picture3.jpg',
   },
   'trip': {
     title: 'SURF TRIPS',
@@ -91,7 +91,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Campos de Férias • 6 aos 16 Anos',
     description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua.',
     countLabel: 'Campos de Férias',
-    bgImage: '/campodeferias.jpg',
+    bgImage: '/kids.png',
   },
   'all': {
     title: 'AULAS DE SURF & SERVIÇOS',
@@ -404,7 +404,9 @@ export default function LessonsList({
               src={categoryInfo.bgImage} 
               alt={categoryInfo.title}
               className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 brightness-105 contrast-105 ${
-                normalizedCategory === 'rental' || normalizedCategory === 'pack' 
+                normalizedCategory === 'camp' || normalizedCategory === 'kids' || categoryInfo.bgImage === '/kids.png'
+                  ? 'object-[center_95%]'
+                  : normalizedCategory === 'rental' || normalizedCategory === 'pack' 
                   ? 'object-[center_68%]' 
                   : 'object-center'
               }`}
@@ -517,6 +519,7 @@ export default function LessonsList({
           detail={SERVICE_DETAILS[activeDetailKey]}
           onBack={handleBackToAllServices}
           onSelectLesson={onSelectLesson}
+          onNavigateToService={handleTabChange}
         />
       ) : (
         <section className="py-14 sm:py-20 bg-slate-50">

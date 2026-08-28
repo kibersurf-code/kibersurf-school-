@@ -98,7 +98,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Material de alta qualidade para desfrutares do mar ao teu ritmo. Softboards, pranchas duras de fibra e fatos térmicos de neoprene.',
     primaryBtnText: 'Catálogo de Aluguer',
     secondaryBtnText: 'Ver Aulas',
-    bgImage: '/loja.jpg',
+    bgImage: '/storebord.png',
     icon: Waves,
   },
   // 6. Grupos Adultos
@@ -112,7 +112,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido.',
     primaryBtnText: 'Saber mais',
     secondaryBtnText: 'Ver Aulas',
-    bgImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    bgImage: '/picture2.jpg',
     icon: Users,
   },
   // 7. Grupos Crianças
@@ -126,7 +126,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Aulas desenhadas para os mais novos com foco total na segurança, diversão e aprendizagem com rácio reforçado de 1 instrutor para 4 alunos.',
     primaryBtnText: 'Saber mais',
     secondaryBtnText: 'Ver Aulas',
-    bgImage: '/criancas.jpg',
+    bgImage: '/picture3.jpg',
     icon: Sun,
   },
   // 8. Surf Trips
@@ -168,7 +168,7 @@ export const HERO_SLIDES: HeroSlideData[] = [
     description: 'Uma semana inesquecível de surf, segurança no mar, novas amizades e diversão na Praia de Matosinhos com supervisão contínua.',
     primaryBtnText: 'Saber mais & Inscrições',
     secondaryBtnText: 'Ver Todas as Aulas',
-    bgImage: '/campodeferias.jpg',
+    bgImage: '/kids.png',
     icon: Sun,
   },
 ];
@@ -296,13 +296,13 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
     setCurrentSlideIndex(index);
   };
 
-  // Autoplay effect (cycles every 7 seconds, pauses when user interacts)
+  // Autoplay effect (cycles every 6 seconds, pauses when user interacts)
   useEffect(() => {
     if (isAutoPlayPaused) return;
 
     const timer = setInterval(() => {
       goToNextSlide();
-    }, 7000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAutoPlayPaused, goToNextSlide]);
@@ -485,6 +485,7 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                   className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-100"
                   style={{ objectPosition: 'center center' }}
                 >
+                  <source src="/backgroundmatosinhos.mp4" type="video/mp4" />
                   <source src="/video.mp4" type="video/mp4" />
                   <source src="/IMG_2047.mp4" type="video/mp4" />
                 </video>
@@ -504,7 +505,13 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                   alt={currentSlide.title}
                   className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-105 scale-105 transition-transform duration-[8000ms]"
                   style={{ 
-                    objectPosition: (currentSlide.id === 'aluguer' || currentSlide.id === 'packs') ? 'center 65%' : 'center center' 
+                    objectPosition: (currentSlide.id === 'campos-ferias' || currentSlide.bgImage === '/kids.png') 
+                      ? 'center 95%' 
+                      : (currentSlide.id === 'grupos-criancas' || currentSlide.bgImage === '/picture3.jpg')
+                      ? 'center center'
+                      : (currentSlide.id === 'aluguer' || currentSlide.id === 'packs') 
+                      ? 'center 65%' 
+                      : 'center center' 
                   }}
                 />
 

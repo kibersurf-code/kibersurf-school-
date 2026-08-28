@@ -115,9 +115,9 @@ export default function CampPage({ onReservarClick, onSelectLesson, onBackToServ
       {/* 1. HERO BANNER */}
       <div className="relative h-[380px] sm:h-[440px] w-full overflow-hidden flex items-center justify-center bg-slate-950">
         <img 
-          src="/campodeferias.jpg" 
+          src="/kids.png" 
           alt="Campo de Férias de Surf - Kiber Surf School"
-          className="absolute inset-0 w-full h-full object-cover object-center brightness-105 contrast-105 scale-105"
+          className="absolute inset-0 w-full h-full object-cover object-[center_95%] brightness-105 contrast-105 scale-105"
         />
         <div className="absolute inset-0 bg-black/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/30" />

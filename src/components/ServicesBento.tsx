@@ -71,7 +71,7 @@ export default function ServicesBento({
             <div 
               className="absolute inset-0 bg-cover bg-[center_70%] transition-transform duration-700 ease-out group-hover:scale-105"
               style={{ 
-                backgroundImage: `url('/loja.jpg')` 
+                backgroundImage: `url('/storebord.png')` 
               }}
             />
             {/* Solid Vignette + Rich Bottom Gradient with lower opacity for bright visibility */}

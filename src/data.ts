@@ -5,6 +5,8 @@ import theWaveBristolImg from './assets/images/the_wave_bristol_trip_17848001734
 import helderCoachImg from './assets/images/helder_coach_1786702791278.jpg';
 import gonzagaCoachImg from './assets/images/gonzaga_coach_1786702802220.jpg';
 import gersonCoachImg from './assets/images/gerson_coach_1786702814096.jpg';
+import marcioCoachImg from './assets/images/marcio_coach_1786702826315.jpg';
+import joaoVaraoCoachImg from './assets/images/joao_varao_coach_1786702839874.jpg';
 import nunoPintoCoachImg from './assets/images/nuno_pinto_coach_1786702851696.jpg';
 
 /**
@@ -100,20 +102,20 @@ export const SERVICES: GlobalService[] = [
   {
     id: 'aluguer',
     name: 'Aluguer',
-    priceLabel: 'Desde 10€',
-    label: 'Desde 10€',
+    priceLabel: 'Desde 12€',
+    label: 'Desde 12€',
     cta: 'Saber mais',
     slug: 'aluguer',
     filterKey: 'rental',
     serviceKey: 'aluguer',
-    tagline: 'Pranchas soft e epoxy, fatos térmicos e transporte direto até à praia',
+    tagline: 'Pranchas soft e epoxy, fatos térmicos de neoprene e cacifos incluídos',
     description: 'Aluguer de equipamento de topo na Praia de Matosinhos. Pranchas soft-foam para iniciantes, pranchas duras de fibra/epoxy e fatos térmicos higienizados.',
     badge: 'Material Oficial FPS',
-    image: '/loja.jpg',
-    duration: '1h a 1 Dia',
+    image: '/storebord.png',
+    duration: '2h a Vários Dias',
     level: 'Todos os Níveis',
-    primaryLessonId: 'rental-board-wetsuit-1h',
-    lessonIds: ['rental-board-wetsuit-1h', 'rental-board-wetsuit-2h', 'rental-board-wetsuit-transport-2h', 'rental-board-wetsuit-4h', 'rental-board-wetsuit-1day', 'rental-board-1h', 'rental-wetsuit-1h'],
+    primaryLessonId: 'rental-combo-2h',
+    lessonIds: ['rental-single-2h', 'rental-single-4h', 'rental-single-1day', 'rental-combo-2h', 'rental-combo-4h', 'rental-combo-1day'],
     techTouch: 'Fatos higienizados e aconselhamento de litragem e marés'
   },
   {
@@ -126,7 +128,7 @@ export const SERVICES: GlobalService[] = [
     tagline: 'Aulas em grupo dinâmicas com turmas niveladas',
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido (máximo 6 alunos por treinador).',
     badge: 'Espírito de Equipa',
-    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2000&q=80',
+    image: '/picture2.jpg',
     duration: '2 Horas',
     level: 'Todos os Níveis',
     primaryLessonId: 'single-lesson',
@@ -143,7 +145,7 @@ export const SERVICES: GlobalService[] = [
     tagline: 'Aulas desenhadas para os 6 aos 14 anos com foco em segurança',
     description: 'Aulas especialmente desenhadas para os mais jovens, combinando diversão, pedagogia adaptada e rácio reduzido de segurança no mar (1 treinador para 4 alunos).',
     badge: 'Kids & Teens • 6 aos 14 Anos',
-    image: '/criancas.jpg',
+    image: '/picture3.jpg',
     duration: '1h 45m',
     level: '6 aos 14 Anos',
     primaryLessonId: 'kids-surf',
@@ -194,7 +196,7 @@ export const SERVICES: GlobalService[] = [
     tagline: 'Programas diários e semanais de Verão com surf, almoço e praia',
     description: 'Programas semanais e diários de Verão na Praia de Matosinhos com 2 sessões diárias de surf, almoço, surfskate, atividades didáticas e supervisão contínua (6 aos 16 anos).',
     badge: 'Campos de Férias • 6 aos 16 Anos',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     duration: 'Diário ou 1 Semana',
     level: '6 aos 16 Anos',
     primaryLessonId: 'camp-week-lunch',
@@ -345,42 +347,156 @@ export const LESSONS: Lesson[] = [
     techTouch: 'Rácio reforçado de segurança na água (1:4)'
   },
   {
-    id: 'rental-board-wetsuit-1h',
+    id: 'rental-single-2h',
     category: 'rental',
-    title: 'Prancha + Fato / Board + Wetsuit - 1h',
-    description: 'Aluguer completo de prancha de surf (soft-foam ou fibra/epoxy) e fato térmico de neoprene de gama alta por 1 hora. Ideal para uma descida rápida às ondas de Matosinhos.',
-    price: 10,
-    duration: '1 Hora',
-    capacity: 'Sujeito à disponibilidade',
+    title: 'Prancha OU Fato - 2h',
+    description: 'Aluguer de 1 prancha de surf OU 1 fato térmico de neoprene por 2 horas na Praia de Matosinhos. Inclui leash, cera, balneários com duches quentes e cacifo privado.',
+    price: 12,
+    duration: '2 Horas',
+    capacity: 'Prancha OU Fato',
     includes: [
-      'Prancha de surf adequada ao nível',
-      'Fato de neoprene térmico (4/3mm ou 3/2mm)',
-      'Leash de segurança e cera incluídos',
-      'Acesso a balneários e duche quente'
+      '1 Prancha de surf (soft-foam ou epoxy) OU 1 Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
     ],
     level: 'Todos os Níveis',
-    image: '/loja.jpg',
-    badge: 'Rentals 10€ / 1h',
+    image: '/storebord.png',
+    badge: '12€ • 2h',
+    techTouch: 'Aconselhamento especializado sobre quilhas e volume'
+  },
+  {
+    id: 'rental-single-4h',
+    category: 'rental',
+    title: 'Prancha OU Fato - 4h',
+    description: 'Aluguer de 1 prancha de surf OU 1 fato térmico de neoprene por 4 horas na Praia de Matosinhos. Ideal para meio dia de surf.',
+    price: 18,
+    duration: '4 Horas',
+    capacity: 'Prancha OU Fato',
+    includes: [
+      '1 Prancha de surf (soft-foam ou epoxy) OU 1 Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '18€ • 4h',
+    techTouch: 'Análise de marés para a sessão de meio dia'
+  },
+  {
+    id: 'rental-single-1day',
+    category: 'rental',
+    title: 'Prancha OU Fato - 1 Dia',
+    description: 'Aluguer de 1 prancha de surf OU 1 fato térmico de neoprene por 1 dia inteiro na Praia de Matosinhos.',
+    price: 24,
+    duration: '1 Dia',
+    capacity: 'Prancha OU Fato',
+    includes: [
+      '1 Prancha de surf (soft-foam ou epoxy) OU 1 Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '24€ • 1 Dia',
+    techTouch: 'Flexibilidade de utilização ao longo de todo o dia'
+  },
+  {
+    id: 'rental-single-extra-day',
+    category: 'rental',
+    title: 'Prancha OU Fato - Dias Extra',
+    description: 'Dias adicionais de aluguer de 1 prancha de surf OU 1 fato térmico de neoprene (18€ por dia extra).',
+    price: 18,
+    duration: 'Dias Extra',
+    capacity: 'Prancha OU Fato',
+    includes: [
+      '1 Prancha de surf (soft-foam ou epoxy) OU 1 Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '18€ / dia extra',
+    techTouch: 'Flexibilidade de prolongamento de aluguer'
+  },
+  {
+    id: 'rental-combo-2h',
+    category: 'rental',
+    title: 'Prancha + Fato - 2h',
+    description: 'Aluguer do conjunto completo de 1 prancha de surf e 1 fato térmico de neoprene por 2 horas na Praia de Matosinhos. A opção mais popular para uma sessão perfeita.',
+    price: 18,
+    duration: '2 Horas',
+    capacity: 'Conjunto Completo',
+    includes: [
+      'Conjunto completo: Prancha de surf + Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '18€ • 2h',
     techTouch: 'Recomendação instantânea de marés e ventos'
   },
   {
-    id: 'rental-board-wetsuit-2h',
+    id: 'rental-combo-4h',
     category: 'rental',
-    title: 'Prancha + Fato / Board + Wetsuit - 2h',
-    description: 'O clássico aluguer completo de prancha de surf e fato de neoprene por 2 horas. A duração ideal para uma excelente e proveitosa sessão no mar de Matosinhos.',
-    price: 15,
-    duration: '2 Horas',
-    capacity: 'Sujeito à disponibilidade',
+    title: 'Prancha + Fato - 4h',
+    description: 'Aluguer do conjunto completo de 1 prancha de surf e 1 fato térmico de neoprene por 4 horas (meio dia) na Praia de Matosinhos.',
+    price: 24,
+    duration: '4 Horas',
+    capacity: 'Conjunto Completo',
     includes: [
-      'Prancha de surf de espuma ou fibra à escolha',
-      'Fato de neoprene higienizado flexível',
-      'Leash e cera aplicados na prancha',
-      'Duche de água quente nos balneários'
+      'Conjunto completo: Prancha de surf + Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
     ],
     level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=800&q=80',
-    badge: 'Rentals 15€ / 2h',
-    techTouch: 'Dicas de segurança e canais de corrente locais'
+    image: '/storebord.png',
+    badge: '24€ • 4h',
+    techTouch: 'Análise detalhada de marés para as duas sessões'
+  },
+  {
+    id: 'rental-combo-1day',
+    category: 'rental',
+    title: 'Prancha + Fato - 1 Dia',
+    description: 'Aluguer do conjunto completo de 1 prancha de surf e 1 fato térmico de neoprene por 1 dia inteiro com máxima liberdade.',
+    price: 30,
+    duration: '1 Dia',
+    capacity: 'Conjunto Completo',
+    includes: [
+      'Conjunto completo: Prancha de surf + Fato de neoprene',
+      'Pranchas de espuma, epoxy ou fibra disponíveis',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '30€ • 1 Dia',
+    techTouch: 'Guia digital de picos de surf da região'
+  },
+  {
+    id: 'rental-combo-extra-day',
+    category: 'rental',
+    title: 'Prancha + Fato - Dias Extra',
+    description: 'Dias adicionais de aluguer do conjunto completo de 1 prancha de surf e 1 fato térmico de neoprene (24€ por cada dia extra).',
+    price: 24,
+    duration: 'Dias Extra',
+    capacity: 'Conjunto Completo',
+    includes: [
+      'Conjunto completo: Prancha de surf + Fato de neoprene',
+      'Leash de segurança e cera aplicados na prancha',
+      'Acesso aos balneários e duches de água quente',
+      'Cacifo privado gratuito para guardar os bens'
+    ],
+    level: 'Todos os Níveis',
+    image: '/storebord.png',
+    badge: '24€ / dia extra',
+    techTouch: 'Tarifa reduzida para estadias prolongadas'
   },
   {
     id: 'rental-board-wetsuit-2h-erasmus',
@@ -439,98 +555,7 @@ export const LESSONS: Lesson[] = [
     badge: 'ERASMUS Pack 55€',
     techTouch: 'Flexibilidade total de agendamento entre aulas'
   },
-  {
-    id: 'rental-board-wetsuit-transport-2h',
-    category: 'rental',
-    title: 'Prancha + Fato + Transporte - 2h',
-    description: 'Praticidade absoluta. Alugamos prancha e fato térmico por 2 horas e garantimos o transporte do material de surf diretamente até ao areal de Matosinhos.',
-    price: 20,
-    duration: '2 Horas',
-    capacity: 'Sujeito à disponibilidade',
-    includes: [
-      'Prancha de surf premium de espuma ou fibra',
-      'Fato de neoprene higienizado adequado ao clima',
-      'Transporte de ida e volta do equipamento até ao areal',
-      'Duches quentes de água doce nos vestiários'
-    ],
-    level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?auto=format&fit=crop&w=800&q=80',
-    badge: 'Rent & Transport 20€',
-    techTouch: 'Logística de transporte rápida e sem esforço'
-  },
-  {
-    id: 'rental-board-wetsuit-4h',
-    category: 'rental',
-    title: 'Prancha + Fato / Board + Wetsuit - 4h',
-    description: 'Aluguer de meio dia. Perfeito para surfistas dedicados que querem surfar, descansar para almoçar, e regressar à água na mudança de maré.',
-    price: 20,
-    duration: '4 Horas',
-    capacity: 'Sujeito à disponibilidade',
-    includes: [
-      'Prancha de surf de espuma ou fibra à escolha',
-      'Fato térmico de neoprene higienizado',
-      'Leash de segurança e cera incluídos',
-      'Cacifo privado gratuito para guardar os bens'
-    ],
-    level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80',
-    badge: 'Rentals 20€ / 4h',
-    techTouch: 'Análise detalhada de marés para as duas sessões'
-  },
-  {
-    id: 'rental-board-wetsuit-1day',
-    category: 'rental',
-    title: 'Prancha + Fato / Board + Wetsuit - 1 Dia / Day',
-    description: 'Liberdade máxima de sol a sol. Aluguer completo por 1 dia inteiro para surfar quando e onde quiser, no Porto ou noutras praias da região.',
-    price: 25,
-    duration: '1 Dia',
-    capacity: 'Sujeito à disponibilidade',
-    includes: [
-      'Prancha de surf e fato de neoprene por um dia inteiro',
-      'Flexibilidade de levar e trazer o equipamento da escola',
-      'Pranchas de espuma, epoxy ou fibra disponíveis',
-      'Guia com recomendações de spots de surf costeiros'
-    ],
-    level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1543096222-72de739f7917?auto=format&fit=crop&w=800&q=80',
-    badge: 'Rental 25€ / Dia',
-    techTouch: 'Guia digital de picos de surf da Costa Norte por SMS'
-  },
-  {
-    id: 'rental-board-1h',
-    category: 'rental',
-    title: 'Aluguer de Prancha / Board Rental - 1h',
-    description: 'Aluguer simples apenas de prancha de surf (soft-board de alta flutuação ou fibra/epoxy) por 1 hora. Perfeito se já possui o seu próprio fato de neoprene.',
-    price: 5,
-    duration: '1 Hora',
-    capacity: 'Sujeito à disponibilidade',
-    includes: [
-      'Prancha de surf selecionada à escolha',
-      'Leash de segurança e cera aplicados na prancha',
-      'Acesso a balneários e cacifo para bens pessoais'
-    ],
-    level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80',
-    badge: 'Prancha 5€ / 1h',
-    techTouch: 'Aconselhamento especializado sobre quilhas e volume'
-  },
-  {
-    id: 'rental-wetsuit-1h',
-    category: 'rental',
-    title: 'Aluguer de Fato / Wetsuit Rental - 1h',
-    description: 'Aluguer simples de fato térmico de neoprene higienizado de gama superior por 1 hora. Ideal para surfistas que já trazem a sua própria prancha de surf.',
-    price: 5,
-    duration: '1 Hora',
-    capacity: 'Sujeito à disponibilidade',
-    includes: [
-      'Fato de neoprene higienizado (4/3mm de grande conforto)',
-      'Acesso a vestiários e duche quente de água doce'
-    ],
-    level: 'Todos os Níveis',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-    badge: 'Fato 5€ / 1h',
-    techTouch: 'Fatos térmicos higienizados com sistema UV ativo'
-  },
+
   {
     id: 'monthly-1x-surf',
     category: 'monthly',
@@ -664,7 +689,7 @@ export const LESSONS: Lesson[] = [
       'Atividades de surfskate, treino funcional e educação sobre o mar'
     ],
     level: 'Todos os Níveis',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     badge: 'Semana c/ Almoço - 220€',
     techTouch: 'Supervisão pedagógica constante e vídeos recordação'
   },
@@ -683,7 +708,7 @@ export const LESSONS: Lesson[] = [
       'Atividades recreativas na areia e aulas de técnica de surf'
     ],
     level: 'Todos os Níveis',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     badge: 'Semana s/ Almoço - 180€',
     techTouch: 'Iniciação segura às ondas e dinâmicas de grupo'
   },
@@ -702,7 +727,7 @@ export const LESSONS: Lesson[] = [
       'Seguro desportivo individual do dia'
     ],
     level: 'Todos os Níveis',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     badge: 'Dia Inteiro c/ Almoço - 55€',
     techTouch: 'Acompanhamento total dentro e fora de água'
   },
@@ -721,7 +746,7 @@ export const LESSONS: Lesson[] = [
       'Supervisão durante o horário de almoço e descansos'
     ],
     level: 'Todos os Níveis',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     badge: 'Dia Inteiro s/ Almoço - 45€',
     techTouch: 'Atividades lúdicas e desportivas adaptadas'
   },
@@ -807,7 +832,7 @@ export const INSTRUCTORS: Instructor[] = [
     specialty: 'Iniciação Pedagógica, Surf Kids & Campos de Férias',
     bio: 'Com enorme empatia e rigor na segurança aquática, o Márcio é a referência para quem dá os primeiros passos no surf e para os alunos dos nossos campos de férias. Faz de cada aula uma experiência divertida, segura e motivadora.',
     rating: 5.0,
-    image: '/marcio.jpg',
+    image: marcioCoachImg,
     imagePosition: 'center 8%',
     languages: ['Português', 'Inglês', 'Francês']
   },
@@ -818,7 +843,7 @@ export const INSTRUCTORS: Instructor[] = [
     specialty: 'Segurança no Mar, Gestão de Correntes & Aulas Privadas Intensivas',
     bio: 'Conhecedor profundo do mar de Matosinhos, o João Varão destaca-se pela atenção ao detalhe e pela confiança que transmite. Especialista em adaptar o treino às necessidades e ritmo de cada aluno em sessões personalizadas.',
     rating: 4.9,
-    image: '/joao_varao.jpg',
+    image: joaoVaraoCoachImg,
     imagePosition: 'center 15%',
     languages: ['Português', 'Inglês']
   },
@@ -1018,29 +1043,30 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
   'aluguer': {
     id: 'aluguer',
     serviceKey: 'aluguer',
-    categoryBadge: 'Aluguer de Equipamento • Material Pro',
-    title: 'Aluguer de Pranchas & Fatos',
-    tagline: 'Equipamento de topo na Praia de Matosinhos',
-    description: 'Desfruta das ondas ao teu ritmo com material de qualidade superior. Pranchas de espuma soft-foam para iniciantes, pranchas duras de epoxy/fibra de performance e fatos térmicos de neoprene higienizados.',
-    duration: '1h a 1 Dia',
+    categoryBadge: 'Aluguer de Equipamento • Praia de Matosinhos',
+    title: 'Aluguer de Equipamento',
+    tagline: 'Pranchas e fatos técnicos na Praia de Matosinhos',
+    description: 'Desfruta das ondas ao teu ritmo com material de qualidade superior na Praia de Matosinhos. Pranchas de alta flutuação soft-foam para iniciantes, pranchas duras de epoxy/fibra de performance e fatos térmicos de neoprene higienizados.\n\nEscolhe a opção ideal para a tua sessão com total flexibilidade de horários.',
+    duration: '2h a Vários Dias',
     level: 'Todos os Níveis',
-    priceDisplay: 'Desde 5€',
-    image: '/loja.jpg',
+    priceDisplay: 'Desde 12€',
+    image: '/fato-prancha.png',
     includes: [
       'Material selecionado e ajustado ao teu nível e peso',
       'Leash de segurança e cera aplicada na prancha',
       'Acesso a balneários e duches de água quente',
-      'Cacifo privado gratuito para guardar os teus bens'
+      'Cacifo privado gratuito para guardar os teus pertences'
     ],
-    techTouch: 'Fatos térmicos higienizados com sistema UV ativo',
+    techTouch: 'Fatos térmicos higienizados e aconselhamento técnico de marés',
     plans: [
-      { id: 'rental-board-1h', label: 'Só Prancha ', boldLabel: '1 hora', price: '5€', priceNum: 5 },
-      { id: 'rental-wetsuit-1h', label: 'Só Fato Neoprene ', boldLabel: '1 hora', price: '5€', priceNum: 5 },
-      { id: 'rental-board-wetsuit-1h', label: 'Prancha + Fato ', boldLabel: '1 hora', price: '10€', priceNum: 10 },
-      { id: 'rental-board-wetsuit-2h', label: 'Prancha + Fato ', boldLabel: '2 horas', price: '15€', priceNum: 15 },
-      { id: 'rental-board-wetsuit-transport-2h', label: 'Prancha + Fato + Transporte ', boldLabel: '2 horas', detail: '(entrega no areal)', price: '20€', priceNum: 20 },
-      { id: 'rental-board-wetsuit-4h', label: 'Prancha + Fato ', boldLabel: 'Meio Dia (4h)', price: '20€', priceNum: 20 },
-      { id: 'rental-board-wetsuit-1day', label: 'Prancha + Fato ', boldLabel: '1 Dia Inteiro', price: '25€', priceNum: 25 }
+      { id: 'rental-single-2h', label: 'Prancha OU Fato • ', boldLabel: '2 horas', price: '12€', priceNum: 12 },
+      { id: 'rental-single-4h', label: 'Prancha OU Fato • ', boldLabel: '4 horas', price: '18€', priceNum: 18 },
+      { id: 'rental-single-1day', label: 'Prancha OU Fato • ', boldLabel: '1 dia', price: '24€', priceNum: 24 },
+      { id: 'rental-single-extra-day', label: 'Prancha OU Fato • ', boldLabel: 'Dias extra', price: '18€ / dia', priceNum: 18 },
+      { id: 'rental-combo-2h', label: 'Prancha + Fato • ', boldLabel: '2 horas', price: '18€', priceNum: 18 },
+      { id: 'rental-combo-4h', label: 'Prancha + Fato • ', boldLabel: '4 horas', price: '24€', priceNum: 24 },
+      { id: 'rental-combo-1day', label: 'Prancha + Fato • ', boldLabel: '1 dia', price: '30€', priceNum: 30 },
+      { id: 'rental-combo-extra-day', label: 'Prancha + Fato • ', boldLabel: 'Dias extra', price: '24€ / dia', priceNum: 24 }
     ],
     highlights: [
       { title: 'Material Higienizado', desc: 'Fatos lavados e desinfetados após cada utilização com produtos biodegradáveis.' },
@@ -1057,7 +1083,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
     duration: '2 Horas por aula',
     level: 'Iniciante ao Avançado',
     priceDisplay: 'Desde 30€',
-    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80',
+    image: '/picture2.jpg',
     includes: [
       'Prancha de Surf adequada ao teu nível e peso',
       'Fato térmico de neoprene (4/3mm) higienizado',
@@ -1088,7 +1114,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
     duration: '1h 45m',
     level: '6 aos 14 Anos',
     priceDisplay: 'Desde 25€',
-    image: '/criancas.jpg',
+    image: '/picture3.jpg',
     includes: [
       'Pranchas soft-foam de segurança acrescida',
       'Fatos térmicos de neoprene flexíveis de 4/3mm',
@@ -1173,7 +1199,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetailItem> = {
     duration: '1 Semana ou Diário (09h às 18h)',
     level: '6 aos 16 Anos',
     priceDisplay: 'Desde 45€ / dia',
-    image: '/campodeferias.jpg',
+    image: '/kids.png',
     includes: [
       '2 sessões diárias de surf orientadas por treinadores certificados FPS',
       'Todo o equipamento técnico (pranchas soft e fatos térmicos)',

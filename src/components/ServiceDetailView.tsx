@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Shield, Award, Sparkles, Clock, Compass, Waves, ArrowRight, ChevronLeft, ChevronRight, UserCheck } from 'lucide-react';
+import { Check, Shield, Award, Sparkles, Clock, Compass, Waves, ArrowRight, ChevronLeft, ChevronRight, GraduationCap, Layers } from 'lucide-react';
 import { ServiceDetailItem, Lesson } from '../types';
 import { LESSONS } from '../data';
-import MensalidadesEnrollmentForm from './MensalidadesEnrollmentForm';
 
 interface ServiceDetailViewProps {
   detail: ServiceDetailItem;
   onBack: () => void;
   onSelectLesson: (lesson: Lesson) => void;
+  onNavigateToService?: (serviceKey: string) => void;
 }
 
-export default function ServiceDetailView({ detail, onBack, onSelectLesson }: ServiceDetailViewProps) {
+export default function ServiceDetailView({ detail, onBack, onSelectLesson, onNavigateToService }: ServiceDetailViewProps) {
   const isMensalidades = detail.id === 'mensalidades' || detail.serviceKey === 'mensalidades';
+  const isRental = detail.id === 'aluguer' || detail.serviceKey === 'aluguer';
   const images = (detail.images && detail.images.length > 0) ? detail.images : [detail.image];
   const [activeImgIndex, setActiveImgIndex] = useState(0);
-  const [selectedPlanForForm, setSelectedPlanForForm] = useState<string | null>(
-    detail.plans && detail.plans.length > 0 ? detail.plans[0].id : null
-  );
 
   React.useEffect(() => {
     setActiveImgIndex(0);
-    if (detail.plans && detail.plans.length > 0) {
-      setSelectedPlanForForm(detail.plans[0].id);
-    }
   }, [detail.id, detail.serviceKey]);
 
   React.useEffect(() => {
@@ -44,23 +39,22 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
     setActiveImgIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
   
-  const scrollToEnrollment = (planId?: string) => {
-    if (planId) {
-      setSelectedPlanForForm(planId);
-    }
-    const formElement = document.getElementById('formulario-mensalidades');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const scrollToContact = () => {
+    const contactElem = document.getElementById('contacto');
+    if (contactElem) {
+      contactElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      onBack();
       setTimeout(() => {
-        const input = document.getElementById('mensalidade-nome');
-        if (input) input.focus();
-      }, 400);
+        const el = document.getElementById('contacto');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
     }
   };
 
   const handleBookingOption = (planId: string) => {
     if (isMensalidades) {
-      scrollToEnrollment(planId);
+      scrollToContact();
       return;
     }
     const found = LESSONS.find(l => l.id === planId) || {
@@ -79,7 +73,7 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
 
   const handleMainBooking = () => {
     if (isMensalidades) {
-      scrollToEnrollment();
+      scrollToContact();
       return;
     }
     if (detail.plans && detail.plans.length > 0) {
@@ -104,6 +98,21 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
     }
   };
 
+  // Dedicated rental tier datasets
+  const singleOptions = [
+    { id: 'rental-single-2h', duration: '2 horas', price: '12€' },
+    { id: 'rental-single-4h', duration: '4 horas', price: '18€' },
+    { id: 'rental-single-1day', duration: '1 dia', price: '24€' },
+    { id: 'rental-single-extra-day', duration: 'Dias extra', price: '18€', note: '/ dia' }
+  ];
+
+  const comboOptions = [
+    { id: 'rental-combo-2h', duration: '2 horas', price: '18€' },
+    { id: 'rental-combo-4h', duration: '4 horas', price: '24€' },
+    { id: 'rental-combo-1day', duration: '1 dia', price: '30€' },
+    { id: 'rental-combo-extra-day', duration: 'Dias extra', price: '24€', note: '/ dia' }
+  ];
+
   return (
     <div className="bg-white text-slate-800 pb-20 animate-in fade-in duration-300">
       
@@ -125,7 +134,7 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
                   transition={{ duration: 0.45 }}
                   className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${
                     detail.id === 'aluguer' || detail.serviceKey === 'aluguer'
-                      ? 'object-[center_65%] brightness-105'
+                      ? 'object-center brightness-105 contrast-105'
                       : 'object-center'
                   }`}
                   referrerPolicy="no-referrer"
@@ -324,53 +333,214 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
               </div>
             </div>
 
-            {/* Plans / Options Table with Dotted Lines and Quick Reserve buttons */}
-            {detail.plans && detail.plans.length > 0 && (
-              <div className="bg-orange-50/40 border border-orange-100/80 rounded-2xl p-5 sm:p-7 space-y-4">
-                <div className="flex items-center justify-between border-b border-orange-200/60 pb-3">
-                  <h4 className="font-sans font-black text-xs sm:text-sm text-[#f18719] uppercase tracking-wider">
-                    Opções & Planos Disponíveis
-                  </h4>
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest hidden sm:inline-block">
-                    Preço por pessoa
+            {/* RENTAL SPECIAL VIEW: Two Distinct Comparison Cards */}
+            {isRental ? (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-sans font-black text-xs sm:text-sm text-[#f18719] uppercase tracking-wider flex items-center gap-2">
+                    <Layers className="w-4 h-4" />
+                    Tabela de Preços de Aluguer
+                  </h3>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                    Preço por equipamento
                   </span>
                 </div>
 
-                <div className="space-y-2">
-                  {detail.plans.map((plan) => (
-                    <button
-                      key={plan.id}
-                      onClick={() => handleBookingOption(plan.id)}
-                      className="w-full flex items-baseline justify-between gap-2 text-left py-2 px-3 rounded-xl hover:bg-[#f18719]/10 transition-all duration-150 group cursor-pointer"
-                    >
-                      <div className="flex items-baseline gap-1.5 flex-1 min-w-0">
-                        <span className="text-[#f18719] font-bold shrink-0 text-xs sm:text-sm">•</span>
-                        <span className="text-slate-800 text-xs sm:text-sm font-medium truncate">
-                          {plan.label}
-                          <strong className="font-black text-slate-950 uppercase text-[11px] sm:text-[13px] ml-1">
-                            {plan.boldLabel}
-                          </strong>{' '}
-                          {plan.detail && (
-                            <span className="text-slate-500 font-normal text-[11px] sm:text-xs">
-                              {plan.detail}
-                            </span>
-                          )}
-                        </span>
-                        <div className="flex-1 border-b border-dotted border-slate-300 min-w-[12px] self-end mb-1" />
-                      </div>
-                      
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-slate-950 font-black text-xs sm:text-sm">
-                          {plan.price}
-                        </span>
-                        <span className="text-[10px] font-black text-white bg-[#f18719] hover:bg-[#db760f] px-3 py-1 rounded-lg shadow-sm uppercase tracking-wider transition-all duration-150 shrink-0">
-                          {isMensalidades ? 'QUERO INSCREVER-ME' : 'Reservar'}
+                {/* 2 Distinct Price Blocks */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  
+                  {/* Bloco 1 — Prancha OU Fato */}
+                  <div className="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-5 sm:p-6 flex flex-col justify-between shadow-sm hover:border-slate-300 transition-all">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 bg-white border border-slate-200 px-2.5 py-1 rounded-md">
+                          Opção Individual
                         </span>
                       </div>
-                    </button>
-                  ))}
+
+                      <h4 className="font-sans font-black text-lg sm:text-xl text-slate-950 uppercase tracking-tight">
+                        Prancha <span className="text-[#f18719]">OU</span> Fato
+                      </h4>
+
+                      <p className="text-xs text-slate-600 font-medium mt-1.5 mb-5 pb-3.5 border-b border-slate-200 leading-snug">
+                        Preços para o aluguer de <strong>uma prancha OU um fato</strong> (não aos dois equipamentos em conjunto).
+                      </p>
+
+                      {/* Pricing lines */}
+                      <div className="space-y-2.5">
+                        {singleOptions.map((opt) => (
+                          <button
+                            key={opt.id}
+                            id={`btn-rental-opt-${opt.id}`}
+                            onClick={() => handleBookingOption(opt.id)}
+                            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200/80 hover:border-[#f18719]/60 hover:bg-orange-50/40 transition-all duration-150 group text-left cursor-pointer"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-slate-400 group-hover:bg-[#f18719] transition-colors" />
+                              <span className="text-xs sm:text-sm font-black text-slate-900">
+                                {opt.duration}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="font-sans font-black text-sm sm:text-base text-slate-950">
+                                {opt.price}
+                                {opt.note && <span className="text-[10px] font-medium text-slate-500 ml-0.5">{opt.note}</span>}
+                              </span>
+                              <span className="text-[10px] font-black text-white bg-slate-800 group-hover:bg-[#f18719] px-2.5 py-1 rounded-lg uppercase tracking-wider transition-colors shadow-xs">
+                                Alugar
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bloco 2 — Prancha + Fato (Conjunto Completo) */}
+                  <div className="bg-orange-50/50 border-2 border-[#f18719]/40 rounded-2xl p-5 sm:p-6 flex flex-col justify-between shadow-sm hover:border-[#f18719] transition-all relative overflow-hidden">
+                    <div className="absolute top-0 right-0">
+                      <span className="bg-[#f18719] text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-bl-xl shadow-xs">
+                        Mais Popular
+                      </span>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-[#f18719] bg-white border border-orange-200 px-2.5 py-1 rounded-md">
+                          Conjunto Completo
+                        </span>
+                      </div>
+
+                      <h4 className="font-sans font-black text-lg sm:text-xl text-slate-950 uppercase tracking-tight">
+                        Prancha <span className="text-[#f18719]">+</span> Fato
+                      </h4>
+
+                      <p className="text-xs text-slate-600 font-medium mt-1.5 mb-5 pb-3.5 border-b border-orange-200/80 leading-snug">
+                        Inclui o conjunto completo de <strong>prancha de surf + fato térmico de neoprene</strong>.
+                      </p>
+
+                      {/* Pricing lines */}
+                      <div className="space-y-2.5">
+                        {comboOptions.map((opt) => (
+                          <button
+                            key={opt.id}
+                            id={`btn-rental-opt-${opt.id}`}
+                            onClick={() => handleBookingOption(opt.id)}
+                            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-orange-200/90 hover:border-[#f18719] hover:bg-orange-50 transition-all duration-150 group text-left cursor-pointer shadow-xs"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#f18719] transition-colors" />
+                              <span className="text-xs sm:text-sm font-black text-slate-900">
+                                {opt.duration}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="font-sans font-black text-sm sm:text-base text-slate-950">
+                                {opt.price}
+                                {opt.note && <span className="text-[10px] font-medium text-slate-500 ml-0.5">{opt.note}</span>}
+                              </span>
+                              <span className="text-[10px] font-black text-white bg-[#f18719] group-hover:bg-[#db760f] px-2.5 py-1 rounded-lg uppercase tracking-wider transition-colors shadow-xs">
+                                Alugar
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Bloco de Destaque: Erasmus e Residentes */}
+                <div 
+                  id="bloco-destaque-erasmus-residentes"
+                  onClick={() => {
+                    if (onNavigateToService) {
+                      onNavigateToService('erasmus');
+                    } else {
+                      onBack();
+                    }
+                  }}
+                  className="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-transparent border border-orange-300/80 hover:border-[#f18719] rounded-2xl p-5 sm:p-6 transition-all duration-200 group cursor-pointer shadow-xs hover:shadow-md"
+                >
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#f18719] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                        <GraduationCap className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h4 className="font-sans font-black text-sm sm:text-base text-slate-950 uppercase tracking-tight">
+                            Desconto Erasmus e Residentes
+                          </h4>
+                          <span className="bg-[#f18719] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            Tarifas Especiais
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 font-medium mt-1 leading-relaxed">
+                          És estudante Erasmus ou residente local? Usufrui de tarifas com desconto especial nas aulas e no aluguer de equipamento.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#f18719] group-hover:text-[#db760f] shrink-0 self-end sm:self-center">
+                      <span>Ver Descontos</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
                 </div>
               </div>
+            ) : (
+              /* Standard Plans / Options Table for other services */
+              detail.plans && detail.plans.length > 0 && (
+                <div className="bg-orange-50/40 border border-orange-100/80 rounded-2xl p-5 sm:p-7 space-y-4">
+                  <div className="flex items-center justify-between border-b border-orange-200/60 pb-3">
+                    <h4 className="font-sans font-black text-xs sm:text-sm text-[#f18719] uppercase tracking-wider">
+                      Opções & Planos Disponíveis
+                    </h4>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest hidden sm:inline-block">
+                      Preço por pessoa
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {detail.plans.map((plan) => (
+                      <button
+                        key={plan.id}
+                        onClick={() => handleBookingOption(plan.id)}
+                        className="w-full flex items-baseline justify-between gap-2 text-left py-2 px-3 rounded-xl hover:bg-[#f18719]/10 transition-all duration-150 group cursor-pointer"
+                      >
+                        <div className="flex items-baseline gap-1.5 flex-1 min-w-0">
+                          <span className="text-[#f18719] font-bold shrink-0 text-xs sm:text-sm">•</span>
+                          <span className="text-slate-800 text-xs sm:text-sm font-medium truncate">
+                            {plan.label}
+                            <strong className="font-black text-slate-950 uppercase text-[11px] sm:text-[13px] ml-1">
+                              {plan.boldLabel}
+                            </strong>{' '}
+                            {plan.detail && (
+                              <span className="text-slate-500 font-normal text-[11px] sm:text-xs">
+                                {plan.detail}
+                              </span>
+                            )}
+                          </span>
+                          <div className="flex-1 border-b border-dotted border-slate-300 min-w-[12px] self-end mb-1" />
+                        </div>
+                        
+                        <div className="flex items-center gap-3 shrink-0">
+                          <span className="text-slate-950 font-black text-xs sm:text-sm">
+                            {plan.price}
+                          </span>
+                          <span className="text-[10px] font-black text-white bg-[#f18719] hover:bg-[#db760f] px-3 py-1 rounded-lg shadow-sm uppercase tracking-wider transition-all duration-150 shrink-0">
+                            {isMensalidades ? 'QUERO INSCREVER-ME' : 'Reservar'}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
             )}
 
             {/* Inclusions Panel */}
@@ -427,15 +597,8 @@ export default function ServiceDetailView({ detail, onBack, onSelectLesson }: Se
 
         </div>
 
-        {/* Integrated Enrollment Form for Mensalidades */}
-        {isMensalidades && (
-          <MensalidadesEnrollmentForm
-            plans={detail.plans || []}
-            selectedPlanId={selectedPlanForForm}
-            onPlanChange={(planId) => setSelectedPlanForForm(planId)}
-          />
-        )}
       </div>
     </div>
   );
 }
+
