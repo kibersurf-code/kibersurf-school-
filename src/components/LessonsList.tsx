@@ -35,7 +35,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Coaching Exclusivo • 100% Personalizado',
     description: 'Treino 1-para-1 ou em dupla com instrutor dedicado em exclusivo. O caminho mais rápido para evolução técnica com correções em tempo real dentro e fora de água.',
     countLabel: 'Aulas Privadas',
-    bgImage: '/Privada (2).jpg.jpeg',
+    bgImage: '/Privada3.jpg.jpeg',
   },
   'pack': {
     title: 'PACKS DE AULAS',
@@ -70,7 +70,7 @@ const CATEGORY_INFO_MAP: Record<string, CategoryInfo> = {
     badge: 'Kids & Teens • 6 aos 14 Anos',
     description: 'Aulas desenhadas para os mais novos com foco total na segurança, diversão e aprendizagem do respeito pelo oceano com rácio reduzido (1 treinador para 4 alunos).',
     countLabel: 'Opções Kids',
-    bgImage: '/picture3.jpg',
+    bgImage: '/michaelrosaphoto.jpg',
   },
   'trip': {
     title: 'SURF TRIPS',
@@ -403,11 +403,15 @@ export default function LessonsList({
             <img 
               src={categoryInfo.bgImage} 
               alt={categoryInfo.title}
-              className={`absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-700 brightness-105 contrast-105 ${
-                normalizedCategory === 'camp' || normalizedCategory === 'kids' || categoryInfo.bgImage === '/kids.png'
-                  ? 'object-[center_95%]'
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 brightness-105 contrast-105 ${
+                normalizedCategory === 'camp' || categoryInfo.bgImage === '/kids.png'
+                  ? 'object-[center_20%]'
+                  : normalizedCategory === 'kids'
+                  ? 'object-[center_15%]'
                   : normalizedCategory === 'rental' || normalizedCategory === 'pack' 
                   ? 'object-[center_68%]' 
+                  : normalizedCategory === 'private'
+                  ? 'object-[center_15%]'
                   : 'object-center'
               }`}
             />

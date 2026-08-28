@@ -9,7 +9,7 @@ export interface HeroSlideData {
   id: string;
   serviceId?: string;
   type: 'main' | 'service';
-  tagline: string;
+  tagline?: string;
   title: string;
   titleHighlight?: string;
   description: string;
@@ -24,9 +24,8 @@ export const HERO_SLIDES: HeroSlideData[] = [
   {
     id: 'main-hero',
     type: 'main',
-    tagline: 'Matosinhos • Porto • Portugal',
     title: 'Vive o surf.',
-    titleHighlight: 'Sente o mar.',
+    titleHighlight: 'Sente Matosinhos.',
     description: 'Aulas de surf, aluguer de equipamento e experiências na Praia de Matosinhos.',
     primaryBtnText: 'Reservar agora',
     secondaryBtnText: 'Ver aulas',
@@ -36,7 +35,6 @@ export const HERO_SLIDES: HeroSlideData[] = [
     id: 'aula-avulso',
     serviceId: 'aula-avulso',
     type: 'service',
-    tagline: 'AULAS DE SURF • SESSÃO INDIVIDUAL',
     title: 'Aula Avulsa de',
     titleHighlight: 'Surf',
     description: 'Aula avulsa de surf em grupo na Praia de Matosinhos. Perfeita para uma primeira experiência ou prática ocasional, com todo o equipamento e seguro incluídos.',
@@ -64,7 +62,6 @@ export const HERO_SLIDES: HeroSlideData[] = [
     id: 'packs',
     serviceId: 'packs',
     type: 'service',
-    tagline: 'FLEXIBILIDADE TOTAL • PACKS DE AULAS',
     title: 'Packs de',
     titleHighlight: 'Aulas de Surf',
     description: 'Packs de aulas de surf para evoluíres ao teu ritmo com horários flexíveis, acompanhamento técnico e todo o equipamento incluído.',
@@ -106,7 +103,6 @@ export const HERO_SLIDES: HeroSlideData[] = [
     id: 'grupos-adultos',
     serviceId: 'grupos-adultos',
     type: 'service',
-    tagline: 'MÉTODO COLETIVO • TURMAS NIVELADAS',
     title: 'Grupos',
     titleHighlight: 'Adultos',
     description: 'Aprende e evolui na companhia de outros surfistas. Turmas dinâmicas divididas rigorosamente por nível de experiência e rácio reduzido.',
@@ -279,6 +275,68 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
   }, []);
 
   // -------------------------------------------------------------
+  // Services Carousel (Slides 2 to 11): Click-Triggered Liquid Distortion Animation
+  // -------------------------------------------------------------
+  const [serviceLiquidScale, setServiceLiquidScale] = useState(0);
+  const [serviceLiquidFreq, setServiceLiquidFreq] = useState({ x: 0.018, y: 0.035 });
+  const [isServiceDistorting, setIsServiceDistorting] = useState(false);
+  const serviceTitleAnimRef = useRef<number | null>(null);
+
+  const triggerServiceLiquidDistortion = useCallback(() => {
+    if (serviceTitleAnimRef.current) {
+      cancelAnimationFrame(serviceTitleAnimRef.current);
+    }
+    setIsServiceDistorting(true);
+    const startTime = performance.now();
+    const duration = 950; // ms
+
+    const animateDistortion = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      if (progress < 1) {
+        // Fluid wave physics: quick expansion into wavy ripples decaying into calm surface
+        const envelope = Math.sin(progress * Math.PI) * Math.pow(1 - progress, 0.65);
+        const wave = Math.sin(progress * Math.PI * 4.2);
+        const scale = Math.max(0, envelope * 24 + wave * 4.5 * (1 - progress));
+
+        const fx = 0.016 + Math.sin(progress * 9) * 0.012;
+        const fy = 0.032 + Math.cos(progress * 8) * 0.018;
+
+        setServiceLiquidScale(Number(scale.toFixed(2)));
+        setServiceLiquidFreq({ x: Number(fx.toFixed(4)), y: Number(fy.toFixed(4)) });
+
+        serviceTitleAnimRef.current = requestAnimationFrame(animateDistortion);
+      } else {
+        setServiceLiquidScale(0);
+        setIsServiceDistorting(false);
+        serviceTitleAnimRef.current = null;
+      }
+    };
+
+    serviceTitleAnimRef.current = requestAnimationFrame(animateDistortion);
+  }, []);
+
+  // Reset service distortion animation on slide change
+  useEffect(() => {
+    if (serviceTitleAnimRef.current) {
+      cancelAnimationFrame(serviceTitleAnimRef.current);
+      serviceTitleAnimRef.current = null;
+    }
+    setServiceLiquidScale(0);
+    setIsServiceDistorting(false);
+  }, [currentSlideIndex]);
+
+  // Clean up animation on unmount
+  useEffect(() => {
+    return () => {
+      if (serviceTitleAnimRef.current) {
+        cancelAnimationFrame(serviceTitleAnimRef.current);
+      }
+    };
+  }, []);
+
+  // -------------------------------------------------------------
   // Carousel Navigation Logic & Autoplay
   // -------------------------------------------------------------
   const goToNextSlide = useCallback(() => {
@@ -392,6 +450,12 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
 
   const currentSlide = HERO_SLIDES[currentSlideIndex];
 
+  const handleTitleClick = () => {
+    if (currentSlide.type !== 'main' && currentSlideIndex > 0) {
+      triggerServiceLiquidDistortion();
+    }
+  };
+
   const handlePrimaryBtnClick = () => {
     if (currentSlide.type === 'main') {
       onAgendarClick();
@@ -409,9 +473,10 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
   return (
     <div id="inicio" className="relative w-full bg-slate-950 text-slate-800 overflow-hidden">
       
-      {/* SVG Filter Definition for Slide 1 Water Wave Ripple Effect */}
+      {/* SVG Filter Definitions for Liquid Wave and Ripple Animations */}
       <svg className="absolute w-0 h-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <defs>
+          {/* Slide 1 Water Wave Ripple Effect */}
           <filter id="water-wave-ripple-filter" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence
               type="fractalNoise"
@@ -423,6 +488,24 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
               in="SourceGraphic"
               in2="waterNoise"
               scale={waterRippleScale}
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="displacedGraphic"
+            />
+          </filter>
+
+          {/* Services Slides (2 to 11) Click Liquid Distortion Animation */}
+          <filter id="service-liquid-distortion-filter" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency={`${serviceLiquidFreq.x} ${serviceLiquidFreq.y}`}
+              numOctaves="3"
+              result="serviceNoise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="serviceNoise"
+              scale={serviceLiquidScale}
               xChannelSelector="R"
               yChannelSelector="G"
               result="displacedGraphic"
@@ -530,31 +613,42 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                 className="space-y-4"
               >
                 {/* Location / Category Badge */}
-                <motion.div 
-                  variants={itemVariants} 
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 shadow-md"
-                >
-                  {currentSlide.type === 'main' ? (
-                    <MapPin className="w-3.5 h-3.5 animate-pulse text-[#f18719]" />
-                  ) : currentSlide.icon ? (
-                    <currentSlide.icon className="w-3.5 h-3.5 text-[#f18719]" />
-                  ) : (
-                    <Sparkles className="w-3.5 h-3.5 text-[#f18719]" />
-                  )}
-                  <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#f18719] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                    {currentSlide.tagline}
-                  </span>
-                </motion.div>
+                {currentSlide.tagline && (
+                  <motion.div 
+                    variants={itemVariants} 
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 shadow-md"
+                  >
+                    {currentSlide.type === 'main' ? (
+                      <MapPin className="w-3.5 h-3.5 animate-pulse text-[#f18719]" />
+                    ) : currentSlide.icon ? (
+                      <currentSlide.icon className="w-3.5 h-3.5 text-[#f18719]" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5 text-[#f18719]" />
+                    )}
+                    <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#f18719] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                      {currentSlide.tagline}
+                    </span>
+                  </motion.div>
+                )}
                 
                 {/* Title */}
-                <motion.h1 
+                <motion.h2 
                   variants={itemVariants}
+                  onClick={handleTitleClick}
                   style={currentSlide.type === 'main' ? {
                     filter: waterRippleScale > 0.05 ? 'url(#water-wave-ripple-filter)' : 'none',
                     transition: 'filter 0.15s ease-out',
                     willChange: 'filter'
-                  } : undefined}
-                  className="text-4xl sm:text-6xl md:text-7xl font-sans font-black text-white leading-[1.1] uppercase tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] cursor-pointer"
+                  } : {
+                    filter: isServiceDistorting && serviceLiquidScale > 0.05 ? 'url(#service-liquid-distortion-filter)' : 'none',
+                    willChange: 'filter'
+                  }}
+                  className={`font-sans font-black text-white uppercase tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] cursor-pointer select-none ${
+                    currentSlide.type === 'main'
+                      ? 'text-4xl sm:text-6xl md:text-7xl leading-[1.1]'
+                      : 'text-2xl sm:text-4xl md:text-5xl leading-[1.15] active:scale-[0.99] transition-transform'
+                  }`}
+                  title={currentSlide.type !== 'main' ? 'Clica para distorção líquida' : undefined}
                 >
                   {currentSlide.title}{' '}
                   {currentSlide.titleHighlight && (
@@ -565,7 +659,7 @@ export default function Hero({ onAgendarClick, onExplorarClick, onServiceSelect,
                       </span>
                     </>
                   )}
-                </motion.h1>
+                </motion.h2>
 
                 {/* Supportive Subtitle */}
                 <motion.p 

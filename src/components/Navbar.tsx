@@ -125,7 +125,7 @@ export default function Navbar({
             onClick={handleLogoClick} 
             className="flex items-center gap-2 cursor-pointer group select-none py-1"
             id="navbar-logo"
-            title="Kiber Surf School - Vive o Surf. Sente o Mar."
+            title="Kiber Surf School - Vive o Surf. Sente Matosinhos."
           >
             <img
               src="/logokiber.png"
