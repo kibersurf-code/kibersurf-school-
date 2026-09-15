@@ -166,10 +166,6 @@ export default function AboutSection({
 
             {/* Lado Direito - Bloco de Informações da Kiber Surf School */}
             <div className="space-y-6 text-left">
-              <div className="inline-block bg-[#ffe6cc] text-[#f18719] text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full">
-                Matosinhos • Porto
-              </div>
-              
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading tracking-tight text-slate-950 uppercase">
                 KIBER SURF SCHOOL
               </h3>

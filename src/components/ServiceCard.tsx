@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ArrowRight, Sparkles, Clock, Compass } from 'lucide-react';
+import { Check, ArrowRight, Clock, Compass } from 'lucide-react';
 import { Lesson } from '../types';
 
 interface ServiceCardProps {
@@ -97,20 +97,8 @@ export default function ServiceCard({ lesson, onReserve, onViewDetails }: Servic
           )}
         </div>
 
-        {/* 3. Bottom Block: Kiber Tech Box + Price & Actions */}
+        {/* 3. Bottom Block: Price & Actions */}
         <div className="space-y-4 pt-1">
-          
-          {/* Kiber Tech Banner */}
-          <div className="bg-[#fff9f2] border border-orange-200/80 rounded-xl px-3.5 py-2.5 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#f18719] shrink-0" />
-            <p className="text-xs text-slate-700 font-medium truncate leading-tight">
-              <strong className="text-[#f18719] font-black uppercase text-[11px] tracking-wide mr-1.5">
-                KIBER TECH:
-              </strong>
-              {lesson.techTouch || 'Plano de evolução individualizado e acompanhamento'}
-            </p>
-          </div>
-
           {/* Price & Action Row */}
           <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div>

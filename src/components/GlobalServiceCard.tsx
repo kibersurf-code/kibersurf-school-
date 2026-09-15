@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ArrowRight, Sparkles, Clock, Compass, Calendar, ChevronRight } from 'lucide-react';
+import { ArrowRight, Clock, Compass, Calendar } from 'lucide-react';
 import { GlobalService } from '../types';
 
 interface GlobalServiceCardProps {
@@ -83,22 +83,8 @@ export default function GlobalServiceCard({
           </div>
         </div>
 
-        {/* 3. Bottom Block: Kiber Tech Box + Price & Actions */}
+        {/* 3. Bottom Block: Price & Actions */}
         <div className="space-y-4 pt-2">
-          
-          {/* Kiber Tech Banner */}
-          {service.techTouch && (
-            <div className="bg-[#fff9f2] border border-orange-200/80 rounded-xl px-3.5 py-2.5 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#f18719] shrink-0" />
-              <p className="text-xs text-slate-700 font-medium truncate leading-tight">
-                <strong className="text-[#f18719] font-black uppercase text-[11px] tracking-wide mr-1.5">
-                  KIBER:
-                </strong>
-                {service.techTouch}
-              </p>
-            </div>
-          )}
-
           {/* Price & Action Row */}
           {service.priceLabel ? (
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
